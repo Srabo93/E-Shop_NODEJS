@@ -1,7 +1,14 @@
 const getAddProduct = (req, res, next) => {
-    res.render('add-product', {
+    res.render('admin/add-product', {
         pageTitle: 'Add Product',
         path: '/admin/add-product'
+    })
+}
+
+const getProducts = (req, res, next) => {
+    res.render('admin/products-list', {
+        pageTitle: 'Products List',
+        path: '/admin/products-list'
     })
 }
 
@@ -12,17 +19,5 @@ const postAddProduct = (req, res, next) => {
     res.redirect('/')
 }
 
-
-const getProducts = (req, res, next) => {
-    const products = ['Book1']
-    res.render('shop', {
-        prods: products,
-        pageTitle: 'Shop',
-        path: '/',
-        hasProducts: products.length > 0,
-        activeShop: true,
-        productCSS: true
-    });
-}
 
 module.exports = {getAddProduct, postAddProduct, getProducts}
