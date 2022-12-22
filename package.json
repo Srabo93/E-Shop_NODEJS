@@ -1,0 +1,19 @@
+{
+  "name": "e-shop-express",
+  "version": "1.4.1",
+  "private": true,
+  "description": "",
+  "author": "mdo",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon -L app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

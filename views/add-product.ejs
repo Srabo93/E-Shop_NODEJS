@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+
+</head>
+
+<body>
+<%- include('includes/navigation.ejs') %>
+
+<main>
+    <form class="container" action="/admin/add-product" method="POST">
+        <div class="m-2">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" class="form-control">
+            <button class="btn btn-outline-primary mt-2" type="submit">Add Product</button>
+        </div>
+    </form>
+</main>
+<%- include('includes/end.ejs') %>
