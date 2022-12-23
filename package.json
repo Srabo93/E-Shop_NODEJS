@@ -5,8 +5,9 @@
   "description": "",
   "author": "mdo",
   "license": "MIT",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon -L app.js"
+    "start": "nodemon -L main -w ./"
   },
   "dependencies": {
     "body-parser": "^1.20.1",
