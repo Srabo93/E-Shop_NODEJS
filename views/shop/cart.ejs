@@ -4,5 +4,39 @@
 
 <body>
 <%- include('../includes/navigation.ejs') %>
+<main class="row text-center list-group w-auto my-2">
+    <% if (cartItems.length > 0 ) { %>
+        <% for (let item of cartItems) { %>
+            <div class=" col-md-6 offset-md-3 my-2">
+                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <img src="<%= item.imgUrl %>" width="32" height="32"
+                                 class="rounded-circle flex-shrink-0">
+                            <h6 class="mb-0"><%= item.title %></h6>
+                            <p class="mb-0 opacity-75"><%= item.description %></p>
+                        </div>
+                        <div class="d-flex flex-column justify-content-end align-content-end">
+                            <small class="opacity-50 text-nowrap">Quantity <%= item.qty %></small>
+                            <small class="mb-0 opacity-75">$<%= item.price %></small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+        <div class=" col-md-6 offset-md-3 my-2">
+            <div class="d-flex gap-2 w-100 justify-content-end">
+                <div>
+                    <h6 class="mb-0">Total:</h6>
+                    <p class="mb-0 opacity-75">$<%= cartTotal %></p>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class=" col-md-6 offset-md-3">
+            <h3>No Items</h3>
+        </div>
+    <% } %>
+</main>
 
 <%- include('../includes/end.ejs') %>

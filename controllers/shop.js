@@ -12,7 +12,21 @@ const products = [{
     id: 2
 }]
 
-const cart = {products: [{id: 1, qty: 2}], totalPrice: 59.98}
+const cart = {
+    products: [{
+        id: 1,
+        title: 'Book 1',
+        price: 4.99,
+        description: 'This Description is absolutely amazing',
+        imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
+        qty: 2
+    }, {
+        id: 2, title: 'Book 2', price: 9.99, description: 'This Description is absolutely amazing',
+        imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg', qty: 4
+    }],
+    totalPrice: 59.98
+}
+
 const getIndex = (req, res, next) => {
     res.render('shop/index', {
         products,
@@ -52,6 +66,8 @@ const getCart = (req, res, next) => {
         products,
         pageTitle: 'Shop|Cart',
         path: '/cart',
+        cartItems: cart.products,
+        cartTotal: cart.totalPrice,
     })
 }
 
