@@ -18,9 +18,10 @@ const getAddProduct = (req, res, next) => {
 
 const getProducts = (req, res, next) => {
     res.render('admin/products-list', {
+        products,
+        hasProducts: products.length > 0,
         pageTitle: 'Products List',
         path: '/admin/products-list',
-        prods: products
     })
 }
 
