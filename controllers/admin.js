@@ -14,7 +14,8 @@ const products = [{
 const getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
         pageTitle: 'Add Product',
-        path: '/admin/add-product'
+        path: '/admin/add-product',
+        editing: false
     })
 }
 
@@ -49,4 +50,18 @@ const getEditProduct = (req, res, next) => {
     })
 }
 
-module.exports = {getAddProduct, postAddProduct, getProducts, getEditProduct}
+const postEditProduct = (req, res, next) => {
+    const {productId, title, description, price, imgUrl} = req.body;
+    console.log(req.body)
+    //update Product
+    res.redirect('/admin/products-list')
+}
+
+const deleteProduct = (req, res, next) => {
+    const {productId} = req.body;
+    console.log(req.body)
+    //delete Product
+    res.redirect('/admin/products-list')
+}
+
+module.exports = {getAddProduct, postAddProduct, getProducts, getEditProduct, postEditProduct, deleteProduct}

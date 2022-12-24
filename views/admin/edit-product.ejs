@@ -23,6 +23,9 @@
                    class="form-label">Image</label>
             <input type="file" name="imgUrl" id="imgUrl" class="form-control" value="<%= editing ? product.imgUrl : ''
             %>">
+            <% if (editing) { %>
+                <input type="hidden" value="<%= product.id %>" name="productId">
+            <% } %>
             <button class="btn btn-outline-primary mt-2" type="submit">
                 <%= editing ? 'Update Product' : 'Add Product' %>
             </button>
