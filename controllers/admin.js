@@ -2,12 +2,14 @@ const products = [{
     title: 'Book1',
     description: 'This Description is absolutely amazing',
     price: 29.99,
-    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg'
+    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
+    id: 1
 }, {
     title: 'Book2',
     description: 'This Description is absolutely amazing',
     price: 19.99,
-    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg'
+    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
+    id: 2
 }]
 const getAddProduct = (req, res, next) => {
     res.render('admin/add-product', {
