@@ -14,7 +14,7 @@ const products = [{
 const getIndex = (req, res, next) => {
 
     res.render('shop/index', {
-        prods: products,
+        products,
         pageTitle: 'Shop',
         path: '/',
         hasProducts: products.length > 0,
@@ -29,9 +29,8 @@ const getOrders = (req, res, next) => {
 }
 
 const getProducts = (req, res, next) => {
-
     res.render('shop/products-list', {
-        prods: products,
+        products,
         pageTitle: 'Shop|Products',
         path: '/product-list',
         hasProducts: products.length > 0,
@@ -39,21 +38,26 @@ const getProducts = (req, res, next) => {
 }
 
 const getProduct = (req, res, next) => {
-    const {id} = req.params
+    const {productId} = req.params
     res.render('shop/product-detail', {
-        prod: products[id],
+        product: products[productId],
         pageTitle: 'Shop|Product',
-        path: `/products/${products[0].id}`,
+        path: '/product-list',
     })
 }
 
 const getCart = (req, res, next) => {
-
     res.render('shop/cart', {
-        prods: products,
+        products,
         pageTitle: 'Shop|Cart',
         path: '/cart',
     })
+}
+
+const postCart = (req, res, next) => {
+    const {productId} = req.body;
+    console.log(productId)
+    res.redirect('/cart')
 }
 
 const getCheckout = (req, res, next) => {
@@ -63,4 +67,4 @@ const getCheckout = (req, res, next) => {
     })
 }
 
-module.exports = {getProducts, getIndex, getCart, getCheckout, getOrders, getProduct}
+module.exports = {getProducts, getIndex, getCart, getCheckout, getOrders, getProduct, postCart}
