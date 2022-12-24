@@ -11,8 +11,9 @@ const products = [{
     imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
     id: 2
 }]
-const getIndex = (req, res, next) => {
 
+const cart = {products: [{id: 1, qty: 2}], totalPrice: 59.98}
+const getIndex = (req, res, next) => {
     res.render('shop/index', {
         products,
         pageTitle: 'Shop',

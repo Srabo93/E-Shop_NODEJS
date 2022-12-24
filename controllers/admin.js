@@ -12,7 +12,7 @@ const products = [{
     id: 2
 }]
 const getAddProduct = (req, res, next) => {
-    res.render('admin/add-product', {
+    res.render('admin/edit-product', {
         pageTitle: 'Add Product',
         path: '/admin/add-product'
     })
@@ -33,5 +33,20 @@ const postAddProduct = (req, res, next) => {
     res.redirect('/')
 }
 
+const getEditProduct = (req, res, next) => {
+    const {productId} = req.params
+    const editMode = req.query.edit;
+    Boolean(editMode)
 
-module.exports = {getAddProduct, postAddProduct, getProducts}
+    if (!editMode) {
+        return res.redirect('/')
+    }
+    res.render('admin/edit-product', {
+        pageTitle: 'Edit Product',
+        path: '/admin/edit-product',
+        editing: editMode,
+        product: products[productId]
+    })
+}
+
+module.exports = {getAddProduct, postAddProduct, getProducts, getEditProduct}
