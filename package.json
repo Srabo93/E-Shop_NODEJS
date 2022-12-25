@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node main",
     "docker": "docker-compose up -d && docker compose exec e-shop sh",
-    "dev": " nodemon -L main -w ./views"
+    "dev": " nodemon main"
   },
   "dependencies": {
     "body-parser": "^1.20.1",

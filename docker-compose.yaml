@@ -6,8 +6,8 @@ services:
     container_name: "e-shop-express"
     working_dir: '/app'
     stdin_open: true
-    tty: true
     volumes:
       - ./:/app
+      - /app/node_modules
     ports:
       - "8000:8000"
