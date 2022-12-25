@@ -77,6 +77,12 @@ const postCart = (req, res, next) => {
     res.redirect('/cart')
 }
 
+const postDeleteCartItem = (req, res, next) => {
+    const {productId} = req.body
+    //remove item / amount from db
+    res.redirect('/cart')
+}
+
 const getCheckout = (req, res, next) => {
     res.render('shop/checkout', {
         pageTitle: 'Shop|Checkout',
@@ -84,4 +90,4 @@ const getCheckout = (req, res, next) => {
     })
 }
 
-module.exports = {getProducts, getIndex, getCart, getCheckout, getOrders, getProduct, postCart}
+module.exports = {getProducts, getIndex, getCart, getCheckout, getOrders, getProduct, postCart, postDeleteCartItem}
