@@ -1,2 +1,2 @@
-# E-Shop_NODEJS
+# E-Commerce_NodeJS
 Simple E-commerce Shop
