@@ -7,23 +7,23 @@
 
 <main class="container my-3">
     <% if (hasProducts) { %>
-        <div class="row">
-            <% for (let product of products) { %>
-                <article class="col-md-3 shadow-sm p-3 m-2 mb-5 bg-white rounded">
-                    <div class="card m-2 ">
-                        <img class="card-img-top img-thumbnail rounded"
-                             src="<%= product.imgUrl %>"
-                             alt="A Book">
+        <% for (let product of products) { %>
+            <div class="row g-0 my-4 pb-2 border-bottom">
+                <div class="col-md-4">
+                    <img src="<%= product.imgUrl %>" class="d-block mx-lg-auto img-fluid" style="max-width: 140px;">
+                </div>
+                <div class="col-md-4 ">
+                    <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
+                    <p class="lead">$<%= product.price %></p>
+                    <p class="lead"><%= product.description %></p>
+                    <div class="d-flex justify-content-start align-content-center">
+                        <a href="/products/<%= product.id %>" class="btn btn-warning">Details</a>
+                        <%- include('../includes/add-to-cart.ejs',{product:product}) %>
                     </div>
-                    <div class="card-body">
-                        <h1 class="card-title"><%= product.title %></h1>
-                    </div>
-                    <h3 class="card-text"><em>$<%= product.price %></em></h3>
-                    <p class="card-text"><%= product.description %></p>
-                    <%- include('../includes/add-to-cart.ejs',{product:product}) %>
-                </article>
-            <% } %>
-        </div>
+                </div>
+                <div class="col-md-4 ">Potentielle Werbung</div>
+            </div>
+        <% } %>
     <% } else { %>
         <h1>No Products Found!</h1>
     <% } %>

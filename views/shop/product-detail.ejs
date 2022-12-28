@@ -5,19 +5,18 @@
 <body>
 <%- include('../includes/navigation.ejs') %>
 <main class="container my-3 ">
-    <div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-5">
-        <div class="col-10 col-sm-6 col-lg-4">
-            <img src="<%= product.imgUrl %>" class="d-block mx-lg-auto img-fluid" width="700"
-                 height="500">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="<%= product.imgUrl %>" class="d-block mx-lg-auto img-fluid" style="max-width: 140px;">
         </div>
-        <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3"><%= product.title %></h1>
+        <div class="col-md-4 ">
+            <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
             <p class="lead">$<%= product.price %></p>
             <p class="lead"><%= product.description %></p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <%- include('../includes/add-to-cart.ejs') %>
-            </div>
+            <%- include('../includes/add-to-cart.ejs') %>
         </div>
+        <div class="col-md-4 ">Potentielle Werbung</div>
     </div>
+
 </main>
 <%- include('../includes/end.ejs') %>
