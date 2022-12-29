@@ -1,16 +1,5 @@
-const products = [{
-    title: 'Book1',
-    description: 'This Description is absolutely amazing',
-    price: 29.99,
-    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
-    id: 1
-}, {
-    title: 'Book2',
-    description: 'This Description is absolutely amazing',
-    price: 19.99,
-    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
-    id: 2
-}]
+const Product = require('../models/Product')
+
 const getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
         pageTitle: 'Add Product',
@@ -20,17 +9,24 @@ const getAddProduct = (req, res, next) => {
 }
 
 const getProducts = (req, res, next) => {
-    res.render('admin/products-list', {
-        products,
-        hasProducts: products.length > 0,
-        pageTitle: 'Products List',
-        path: '/admin/products-list',
-    })
+    Product.findAll().then(products => {
+        res.render('admin/products-list', {
+            products,
+            hasProducts: products.length > 0,
+            pageTitle: 'Products List',
+            path: '/admin/products-list',
+        })
+    }).catch(error => console.log(error))
 }
 
 const postAddProduct = (req, res, next) => {
     const {title, description, price, imgUrl} = req.body;
-    console.log(req.body)
+    Product.create({
+        title,
+        price,
+        image: imgUrl,
+        description,
+    }).then(() => console.log('Created Product')).catch(error => console.log(error))
     res.redirect('/')
 }
 
@@ -42,26 +38,39 @@ const getEditProduct = (req, res, next) => {
     if (!editMode) {
         return res.redirect('/')
     }
-    res.render('admin/edit-product', {
-        pageTitle: 'Edit Product',
-        path: '/admin/edit-product',
-        editing: editMode,
-        product: products[productId]
-    })
+    Product.findByPk(productId).then(product => {
+        res.render('admin/edit-product', {
+            pageTitle: 'Edit Product',
+            path: '/admin/edit-product',
+            editing: editMode,
+            product
+        })
+    }).catch(error => console.log(error))
 }
 
 const postEditProduct = (req, res, next) => {
     const {productId, title, description, price, imgUrl} = req.body;
-    console.log(req.body)
+
+    const updatedProduct = Product.findByPk(productId).then(product => {
+        product.title = title ? title : product.title
+        product.description = description ? description : product.description
+        product.price = price ? price : product.price
+        product.image = imgUrl ? imgUrl : product.image
+        return product.save()
+    }).catch(error => console.log(error))
+
     //update Product
     res.redirect('/admin/products-list')
 }
 
 const deleteProduct = (req, res, next) => {
     const {productId} = req.body;
-    console.log(req.body)
-    //delete Product
-    res.redirect('/admin/products-list')
+
+    Product.findByPk(productId).then(product => {
+        return product.destroy();
+    }).then(() => {
+        res.redirect('/admin/products-list')
+    }).catch(error => console.log(error))
 }
 
 module.exports = {getAddProduct, postAddProduct, getProducts, getEditProduct, postEditProduct, deleteProduct}

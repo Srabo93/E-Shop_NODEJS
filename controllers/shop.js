@@ -1,39 +1,14 @@
-const products = [{
-    title: 'Book1',
-    description: 'This Description is absolutely amazing',
-    price: 29.99,
-    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
-    id: 1
-}, {
-    title: 'Book2',
-    description: 'This Description is absolutely amazing',
-    price: 19.99,
-    imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
-    id: 2
-}]
-
-const cart = {
-    products: [{
-        id: 1,
-        title: 'Book 1',
-        price: 4.99,
-        description: 'This Description is absolutely amazing',
-        imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg',
-        qty: 2
-    }, {
-        id: 2, title: 'Book 2', price: 9.99, description: 'This Description is absolutely amazing',
-        imgUrl: 'https://m.media-amazon.com/images/I/410f-bUBR3L.jpg', qty: 4
-    }],
-    totalPrice: 59.98
-}
+const Product = require('../models/Product')
 
 const getIndex = (req, res, next) => {
-    res.render('shop/index', {
-        products,
-        pageTitle: 'Shop',
-        path: '/',
-        hasProducts: products.length > 0,
-    })
+    Product.findAll().then((products) => {
+        res.render('shop/index', {
+            products,
+            pageTitle: 'Shop',
+            path: '/',
+            hasProducts: products.length > 0,
+        })
+    }).catch(error => console.log(error));
 }
 
 const getOrders = (req, res, next) => {
@@ -44,21 +19,25 @@ const getOrders = (req, res, next) => {
 }
 
 const getProducts = (req, res, next) => {
-    res.render('shop/products-list', {
-        products,
-        pageTitle: 'Shop|Products',
-        path: '/product-list',
-        hasProducts: products.length > 0,
-    });
+    Product.findAll().then((products) => {
+        res.render('shop/products-list', {
+            products,
+            pageTitle: 'Shop|Products',
+            path: '/product-list',
+            hasProducts: products.length > 0,
+        });
+    }).catch(error => console.log(error));
 }
 
 const getProduct = (req, res, next) => {
     const {productId} = req.params
-    res.render('shop/product-detail', {
-        product: products[productId],
-        pageTitle: 'Shop|Product',
-        path: '/product-list',
-    })
+    Product.findByPk(productId).then((product) => {
+        res.render('shop/product-detail', {
+            product,
+            pageTitle: 'Shop|Product',
+            path: '/product-list',
+        })
+    }).catch(err => console.log(err))
 }
 
 const getCart = (req, res, next) => {

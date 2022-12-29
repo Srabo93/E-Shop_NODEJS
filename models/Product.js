@@ -24,10 +24,6 @@ const Product = sequelize.define('product', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    }
 })
 
 module.exports = Product;
