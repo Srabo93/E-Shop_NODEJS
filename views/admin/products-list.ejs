@@ -13,9 +13,9 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Image</th>
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
-                <th scope="col">Image</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -24,12 +24,11 @@
                 <tr>
                     <th scope="row"><%= product.id %></th>
                     <td><%= product.title %></td>
-                    <td><%= product.description %></td>
-                    <td>$<%= product.price %></td>
                     <td><img class="img-thumbnail"
-                             style="max-width: 3rem"
-                             src="<%= product.imgUrl %>">
+                             src="<%= product.image %>">
                     </td>
+                    <td><%= product.description %></td>
+                    <td><strong>$<%= product.price %></strong></td>
                     <td>
                         <a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn btn-sm btn-secondary
                         m-1">Edit

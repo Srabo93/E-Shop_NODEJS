@@ -11,18 +11,18 @@
         <% for (let product of products) { %>
             <div class="row g-0 my-4 pb-2 border-bottom">
                 <div class="col-md-4">
-                    <img src="<%= product.imgUrl %>" class="d-block mx-lg-auto img-fluid" style="max-width: 140px;">
+                    <img src="<%= product.image %>" class="d-block p-5 mx-lg-auto img-fluid">
                 </div>
-                <div class="col-md-4 ">
+                <div class="col-md-5 ">
                     <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
-                    <p class="lead">$<%= product.price %></p>
+                    <p class="lead"><strong>$<%= product.price %></strong></p>
                     <p class="lead"><%= product.description %></p>
                     <div class="d-flex justify-content-start align-content-center">
                         <a href="/products/<%= product.id %>" class="btn btn-warning">Details</a>
                         <%- include('../includes/add-to-cart.ejs',{product:product}) %>
                     </div>
                 </div>
-                <div class="col-md-4 ">Potentielle Werbung</div>
+                <div class="col-md-3">Potentielle Werbung</div>
             </div>
         <% } %>
     <% } else { %>
