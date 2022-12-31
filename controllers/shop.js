@@ -54,7 +54,7 @@ const getCart = asyncHandler(async (req, res, next) => {
 
 const postCart = asyncHandler(async (req, res, next) => {
     const {productId} = req.body;
-    let cart = req.user.getCart();
+    let cart = await req.user.getCart();
     let cartProducts = await cart.getProducts({where: {id: productId}})
 
     let product;
@@ -65,20 +65,26 @@ const postCart = asyncHandler(async (req, res, next) => {
     }
 
     if (product) {
-        const oldQuantity = product['cart-item'].quantity
+        const oldQuantity = product.cartItem.quantity
         newQuantity = oldQuantity + 1;
-        return await cart.addProduct(product, {through: {quantity: newQuantity}})
+        await cart.addProduct(product, {through: {quantity: newQuantity}})
+        res.redirect('/cart')
+        return
     }
 
     const newProduct = await Product.findByPk(productId)
-    cart.addProduct(newProduct, {through: {quantity: newQuantity}});
+    await cart.addProduct(newProduct, {through: {quantity: newQuantity}});
 
     res.redirect('/cart')
 })
 
 const postDeleteCartItem = asyncHandler(async (req, res, next) => {
     const {productId} = req.body
-    //remove item / amount from db
+    const cart = await req.user.getCart()
+    const product = await cart.getProducts({where: {id: productId}})
+
+    await product[0].cartItem.destroy();
+
     res.redirect('/cart')
 })
 

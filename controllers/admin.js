@@ -59,14 +59,14 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
     product.image = imgUrl ? imgUrl : product.image
     await product.save()
 
-
     res.redirect('/admin/products-list')
 })
 
 const deleteProduct = asyncHandler(async (req, res, next) => {
     const {productId} = req.body;
 
-    await Product.findByPk(productId).destroy();
+    const product = await Product.findByPk(productId)
+    await product.destroy();
     res.redirect('/admin/products-list')
 })
 
