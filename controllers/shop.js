@@ -46,12 +46,12 @@ const getCart = (req, res, next) => {
             return cart
                 .getProducts()
                 .then(products => {
+                    console.log(products)
                     res.render('shop/cart', {
-                        products,
                         pageTitle: 'Shop|Cart',
                         path: '/cart',
-                        cartItems: cart.products,
-                        cartTotal: cart.totalPrice,
+                        cartItems: products,
+                        cartTotal: 59,
                     })
                 })
         })
@@ -61,7 +61,32 @@ const getCart = (req, res, next) => {
 
 const postCart = (req, res, next) => {
     const {productId} = req.body;
-    console.log(productId)
+    let fetchedCart;
+    req.user
+        .getCart()
+        .then(cart => {
+            fetchedCart = cart;
+            return cart.getProducts({where: {id: productId}});
+        })
+        .then(products => {
+            let product;
+            if (products.length > 0) {
+                product = products[0]
+            }
+            let newQuantity = 1;
+            //TODO: Add Product is not working!
+            if (product) {
+                const oldQuantity = product['cart-item'].quantity
+                newQuantity = oldQuantity + 1;
+                return fetchedCart.addProduct(product, {through: {quantity: newQuantity}})
+            }
+            return Product.findByPk(productId).then(
+                product => {
+                    return fetchedCart.addProduct(product, {through: {quantity: newQuantity}});
+                }
+            ).catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
     res.redirect('/cart')
 }
 
