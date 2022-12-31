@@ -1,5 +1,6 @@
 const Product = require('../models/Product')
-
+const User = require('../models/User')
+const Cart = require('../models/Cart')
 let products = [
     {
         "id": 1,
@@ -301,4 +302,9 @@ products.forEach(product => {
         image: product.thumbnail,
         description: product.description,
     })
+})
+
+User.create({
+    username: 'Armin',
+    email: 'test@test.de'
 })
