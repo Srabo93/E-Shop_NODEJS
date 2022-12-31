@@ -1,106 +1,92 @@
 const Product = require('../models/Product')
+const asyncHandler = require('express-async-handler')
 
-const getIndex = (req, res, next) => {
-    Product.findAll().then((products) => {
-        res.render('shop/index', {
-            products,
-            pageTitle: 'Shop',
-            path: '/',
-            hasProducts: products.length > 0,
-        })
-    }).catch(error => console.log(error));
-}
+const getIndex = asyncHandler(async (req, res, next) => {
+    const products = await Product.findAll()
+    res.render('shop/index', {
+        products,
+        pageTitle: 'Shop',
+        path: '/',
+        hasProducts: products.length > 0,
+    })
+})
 
-const getOrders = (req, res, next) => {
+const getOrders = asyncHandler(async (req, res, next) => {
     res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Shop|My Orders'
     })
-}
+})
 
-const getProducts = (req, res, next) => {
-    Product.findAll().then((products) => {
-        res.render('shop/products-list', {
-            products,
-            pageTitle: 'Shop|Products',
-            path: '/product-list',
-            hasProducts: products.length > 0,
-        });
-    }).catch(error => console.log(error));
-}
+const getProducts = asyncHandler(async (req, res, next) => {
+    const products = await Product.findAll()
+    res.render('shop/products-list', {
+        products,
+        pageTitle: 'Shop|Products',
+        path: '/product-list',
+        hasProducts: products.length > 0,
+    });
 
-const getProduct = (req, res, next) => {
+})
+
+const getProduct = asyncHandler(async (req, res, next) => {
     const {productId} = req.params
-    Product.findByPk(productId).then((product) => {
-        res.render('shop/product-detail', {
-            product,
-            pageTitle: 'Shop|Product',
-            path: '/product-list',
-        })
-    }).catch(err => console.log(err))
-}
+    const product = await Product.findByPk(productId)
+    res.render('shop/product-detail', {
+        product,
+        pageTitle: 'Shop|Product',
+        path: '/product-list',
+    })
 
-const getCart = (req, res, next) => {
-    req.user.getCart()
-        .then(cart => {
-            return cart
-                .getProducts()
-                .then(products => {
-                    console.log(products)
-                    res.render('shop/cart', {
-                        pageTitle: 'Shop|Cart',
-                        path: '/cart',
-                        cartItems: products,
-                        cartTotal: 59,
-                    })
-                })
-        })
-        .catch(error => console.log(error))
+})
 
-}
+const getCart = asyncHandler(async (req, res, next) => {
+    const cart = await req.user.getCart()
+    const products = await cart.getProducts()
 
-const postCart = (req, res, next) => {
+    res.render('shop/cart', {
+        pageTitle: 'Shop|Cart',
+        path: '/cart',
+        cartItems: products,
+        cartTotal: 59,
+    })
+})
+
+const postCart = asyncHandler(async (req, res, next) => {
     const {productId} = req.body;
-    let fetchedCart;
-    req.user
-        .getCart()
-        .then(cart => {
-            fetchedCart = cart;
-            return cart.getProducts({where: {id: productId}});
-        })
-        .then(products => {
-            let product;
-            if (products.length > 0) {
-                product = products[0]
-            }
-            let newQuantity = 1;
-            //TODO: Add Product is not working!
-            if (product) {
-                const oldQuantity = product['cart-item'].quantity
-                newQuantity = oldQuantity + 1;
-                return fetchedCart.addProduct(product, {through: {quantity: newQuantity}})
-            }
-            return Product.findByPk(productId).then(
-                product => {
-                    return fetchedCart.addProduct(product, {through: {quantity: newQuantity}});
-                }
-            ).catch(error => console.log(error))
-        })
-        .catch(error => console.log(error))
-    res.redirect('/cart')
-}
+    let cart = req.user.getCart();
+    let cartProducts = await cart.getProducts({where: {id: productId}})
 
-const postDeleteCartItem = (req, res, next) => {
+    let product;
+    let newQuantity = 1;
+
+    if (cartProducts.length > 0) {
+        product = cartProducts[0]
+    }
+
+    if (product) {
+        const oldQuantity = product['cart-item'].quantity
+        newQuantity = oldQuantity + 1;
+        return await cart.addProduct(product, {through: {quantity: newQuantity}})
+    }
+
+    const newProduct = await Product.findByPk(productId)
+    cart.addProduct(newProduct, {through: {quantity: newQuantity}});
+
+    res.redirect('/cart')
+})
+
+const postDeleteCartItem = asyncHandler(async (req, res, next) => {
     const {productId} = req.body
     //remove item / amount from db
     res.redirect('/cart')
-}
+})
 
-const getCheckout = (req, res, next) => {
+const getCheckout = asyncHandler(async (req, res, next) => {
     res.render('shop/checkout', {
         pageTitle: 'Shop|Checkout',
         path: '/checkout'
     })
-}
+})
 
 module.exports = {getProducts, getIndex, getCart, getCheckout, getOrders, getProduct, postCart, postDeleteCartItem}
