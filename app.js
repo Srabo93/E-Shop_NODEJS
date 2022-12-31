@@ -11,9 +11,11 @@ const app = express();
 
 /* DB Connection and init DB*/
 const Product = require('./models/Product')
-const User = require("./models/User");
+const User = require('./models/User');
 const Cart = require('./models/Cart')
 const CartItem = require('./models/CartItem')
+const Order = require('./models/Order')
+const OrderItem = require('./models/OrderItem')
 
 Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'})
 User.hasMany(Product)
@@ -21,6 +23,10 @@ User.hasOne(Cart)
 Cart.belongsTo(User)
 Cart.belongsToMany(Product, {through: CartItem})
 Product.belongsToMany(Cart, {through: CartItem})
+User.hasOne(Order)
+Order.belongsTo(User)
+Order.hasMany(Order);
+Order.belongsToMany(Product, {through: OrderItem})
 
 sequelize.authenticate()
     .then(() => console.log('Connection has been established successfully.'))
