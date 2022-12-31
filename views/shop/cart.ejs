@@ -35,11 +35,14 @@
             </div>
         <% } %>
         <div class=" col-md-6 offset-md-3 my-2">
-            <div class="d-flex gap-2 w-100 justify-content-end">
-                <div>
-                    <h6 class="mb-0 h3">Total:</h6>
-                    <p class="mb-0 opacity-75 h4">$<%= cartTotal %></p>
-                </div>
+            <div class="d-flex gap-2 w-100 justify-content-end align-items-baseline">
+                <h6 class="mb-0 h3">Total:</h6>
+                <p class="mb-0 opacity-75 h4">$<%= cartTotal %></p>
+            </div>
+            <div class="d-flex">
+                <form action="/create-order" method="post">
+                    <button type="submit" class="btn btn-sm btn-primary">Order Now!</button>
+                </form>
             </div>
         </div>
     <% } else { %>

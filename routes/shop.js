@@ -7,7 +7,7 @@ const {
     getOrders,
     getProduct,
     postCart,
-    postDeleteCartItem
+    postDeleteCartItem, postOrder,
 } = require("../controllers/shop");
 const router = express.Router();
 
@@ -19,5 +19,6 @@ router.route('/cart').get(getCart).post(postCart)
 router.route('/cart-delete-item').post(postDeleteCartItem)
 router.route('/checkout').get(getCheckout)
 router.route('/orders').get(getOrders)
+router.route('/create-order').post(postOrder)
 
 module.exports = router;
