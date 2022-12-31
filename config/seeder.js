@@ -308,3 +308,5 @@ User.create({
     username: 'Armin',
     email: 'test@test.de'
 })
+
+Cart.create({})
