@@ -21,7 +21,8 @@ const getProducts = (req, res, next) => {
 
 const postAddProduct = (req, res, next) => {
     const {title, description, price, imgUrl} = req.body;
-    Product.create({
+
+    req.user.createProduct({
         title,
         price,
         image: imgUrl,

@@ -41,13 +41,22 @@ const getProduct = (req, res, next) => {
 }
 
 const getCart = (req, res, next) => {
-    res.render('shop/cart', {
-        products,
-        pageTitle: 'Shop|Cart',
-        path: '/cart',
-        cartItems: cart.products,
-        cartTotal: cart.totalPrice,
-    })
+    req.user.getCart()
+        .then(cart => {
+            return cart
+                .getProducts()
+                .then(products => {
+                    res.render('shop/cart', {
+                        products,
+                        pageTitle: 'Shop|Cart',
+                        path: '/cart',
+                        cartItems: cart.products,
+                        cartTotal: cart.totalPrice,
+                    })
+                })
+        })
+        .catch(error => console.log(error))
+
 }
 
 const postCart = (req, res, next) => {
