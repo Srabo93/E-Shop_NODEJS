@@ -23,9 +23,8 @@ User.hasOne(Cart)
 Cart.belongsTo(User)
 Cart.belongsToMany(Product, {through: CartItem})
 Product.belongsToMany(Cart, {through: CartItem})
-User.hasOne(Order)
 Order.belongsTo(User)
-Order.hasMany(Order);
+User.hasMany(Order)
 Order.belongsToMany(Product, {through: OrderItem})
 
 sequelize.authenticate()
@@ -42,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(async (req, res, next) => {
     req.user = await User.findByPk(1);
-    console.log(req.user)
+
     next();
 })
 
