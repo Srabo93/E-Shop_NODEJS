@@ -1,5 +1,4 @@
 const Product = require('../models/Product')
-const Order = require('../models/Order')
 const asyncHandler = require('express-async-handler')
 
 const getIndex = asyncHandler(async (req, res, next) => {
@@ -13,21 +12,33 @@ const getIndex = asyncHandler(async (req, res, next) => {
 })
 
 const getOrders = asyncHandler(async (req, res, next) => {
+    let orders = await req.user.getOrders({include: ['products']})
+
+    await orders.forEach(order => {
+        order.dataValues.orderTotal = 0;
+        order.products.forEach(product => {
+            let currentTotal = Number(product.dataValues.orderItem.quantity * product.price)
+            order.dataValues.orderTotal = order.dataValues.orderTotal + currentTotal
+        })
+    })
+
     res.render('shop/orders', {
         path: '/orders',
-        pageTitle: 'Shop|My Orders'
+        pageTitle: 'Shop|My Orders',
+        orders,
     })
 })
 
 const postOrder = asyncHandler(async (req, res, next) => {
     const cart = await req.user.getCart()
     const products = await cart.getProducts()
-
     const order = await req.user.createOrder();
+
     await order.addProducts(products.map(product => {
         product.orderItem = {quantity: product.cartItem.quantity};
         return product
     }))
+    
     await cart.setProducts(null)
     res.redirect('/orders')
 })
@@ -58,11 +69,18 @@ const getCart = asyncHandler(async (req, res, next) => {
     const cart = await req.user.getCart()
     const products = await cart.getProducts()
 
+    let cartTotal = 0;
+
+    await products.forEach(product => {
+        let currentTotal = product.dataValues.cartItem.quantity * product.price
+        cartTotal += currentTotal
+    })
+
     res.render('shop/cart', {
         pageTitle: 'Shop|Cart',
         path: '/cart',
         cartItems: products,
-        cartTotal: 59,
+        cartTotal,
     })
 })
 
