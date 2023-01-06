@@ -4,6 +4,7 @@ const path = require('path')
 const sequelize = require('./config/database')
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin')
+const authRoutes = require('./routes/auth')
 const {send404Page} = require("./controllers/error");
 
 
@@ -45,7 +46,8 @@ app.use(async (req, res, next) => {
     next();
 })
 
-app.use('/', shopRoutes)
+app.use(shopRoutes)
+app.use(authRoutes)
 app.use('/admin', adminRoutes);
 app.use(send404Page)
 
