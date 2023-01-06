@@ -5,9 +5,9 @@
 <body>
 <%- include('../includes/navigation.ejs') %>
 
-<main class="container-sm w-25">
+<main class="container-sm">
     <form action="<%= editing ? '/admin/edit-product' : '/admin/add-product' %>" method="POST">
-        <div class="m-2">
+        <div class="m-2" style="max-width: 80%">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" id="title" value="<%= editing ? product.title : '' %>"
                    class="form-control">
