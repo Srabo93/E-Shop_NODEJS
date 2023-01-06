@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const asyncHandler = require('express-async-handler')
+const bcrypt = require('bcryptjs')
 
 const getLogin = asyncHandler(async (req, res, next) => {
 
@@ -28,17 +29,16 @@ const postSignUp = asyncHandler(async (req, res, next) => {
     const {email, password, repeatedPassword} = req.body
 
     const user = await User.findOne({where: {email}});
-
     if (!user) {
-        console.log('no user found');
-        return User.create({
+        let hashedPassword = await bcrypt.hash(password, 12);
+        await User.create({
             email,
-            password,
+            password: hashedPassword
         })
+        return res.redirect('/login')
     }
 
-    return res.redirect('/login')
-
+    return res.redirect('/signup')
 })
 
 
