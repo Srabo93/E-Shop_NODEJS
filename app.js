@@ -10,6 +10,7 @@ const {send404Page} = require("./controllers/error");
 
 
 const app = express();
+require('dotenv').config()
 
 /* DB Connection and init DB*/
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
@@ -42,7 +43,7 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
-    secret: "keyboard cat",
+    secret: process.env.SESSION_SECRET,
     store: new SequelizeStore({
         db: sequelize,
     }),
@@ -54,7 +55,7 @@ app.use(async (req, res, next) => {
     if (!req.session.user) {
         return next();
     }
-    
+
     req.user = await User.findByPk(req.session.user.id);
 
     next();
@@ -66,4 +67,4 @@ app.use('/admin', adminRoutes);
 app.use(send404Page)
 
 
-app.listen(8000, () => console.log('app is listening'))
+app.listen(process.env.PORT, () => console.log('app is listening'))
