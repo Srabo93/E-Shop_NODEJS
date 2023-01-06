@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const path = require('path')
 const sequelize = require('./config/database')
@@ -11,6 +12,7 @@ const {send404Page} = require("./controllers/error");
 const app = express();
 
 /* DB Connection and init DB*/
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const Product = require('./models/Product')
 const User = require('./models/User');
 const Cart = require('./models/Cart')
@@ -39,9 +41,19 @@ app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+    secret: "keyboard cat",
+    store: new SequelizeStore({
+        db: sequelize,
+    }),
+    resave: false, // we support the touch method so per the express-session docs this should be set to false
+}));
 
 app.use(async (req, res, next) => {
-    req.user = await User.findByPk(1);
+    if (!req.session.user) {
+        return next();
+    }
+    req.user = await User.findByPk(req.session.user.id);
 
     next();
 })

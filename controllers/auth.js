@@ -10,11 +10,19 @@ const getLogin = asyncHandler(async (req, res, next) => {
 })
 
 const postLogin = asyncHandler((req, res, next) => {
-    res.setHeader('Set-Cookie', 'loggedIn=true')
+    req.session.isLoggedIn = true;
     res.redirect('/')
+})
+
+const getLogout = asyncHandler((req, res, next) => {
+    req.session.destroy((err) => {
+        console.log(err)
+        res.redirect('/')
+    });
 })
 
 module.exports = {
     getLogin,
-    postLogin
+    postLogin,
+    getLogout
 }
