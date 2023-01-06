@@ -305,8 +305,10 @@ products.forEach(product => {
 })
 
 User.create({
-    username: 'Armin',
+    password: 'ArminPassword',
     email: 'test@test.de'
 })
 
-Cart.create({})
+Cart.findOrCreate({
+    where: {userId: 1}
+})
