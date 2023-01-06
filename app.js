@@ -46,14 +46,15 @@ app.use(session({
     store: new SequelizeStore({
         db: sequelize,
     }),
+    saveUninitialized: false,
     resave: false, // we support the touch method so per the express-session docs this should be set to false
 }));
 
 app.use(async (req, res, next) => {
     if (!req.session.user) {
-        req.session.user = await User.findByPk(1)
         return next();
     }
+    
     req.user = await User.findByPk(req.session.user.id);
 
     next();
