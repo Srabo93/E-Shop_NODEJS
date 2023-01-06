@@ -10,12 +10,13 @@ const getLogin = asyncHandler(async (req, res, next) => {
     })
 })
 
-const postLogin = asyncHandler((req, res, next) => {
+const postLogin = asyncHandler(async (req, res, next) => {
     req.session.isLoggedIn = true;
+    req.session.user = await User.findByPk(1)
     res.redirect('/')
 })
 
-const getSignUp = asyncHandler((req, res, next) => {
+const getSignUp = asyncHandler(async (req, res, next) => {
     res.render('auth/signUp', {
         pageTitle: 'Sign Up',
         path: '/signup',
@@ -23,14 +24,14 @@ const getSignUp = asyncHandler((req, res, next) => {
     })
 })
 
-const postSignUp = asyncHandler((req, res, next) => {
+const postSignUp = asyncHandler(async (req, res, next) => {
     const {email, password, repeatedPassword} = req.body
 
-    const user = User.findOne({where: {email}});
+    const user = await User.findOne({where: {email}});
 
     if (!user) {
         console.log('no user found');
-        const newUser = new User({
+        return User.create({
             email,
             password,
         })
@@ -41,7 +42,7 @@ const postSignUp = asyncHandler((req, res, next) => {
 })
 
 
-const getLogout = asyncHandler((req, res, next) => {
+const getLogout = asyncHandler(async (req, res, next) => {
     req.session.destroy((err) => {
         console.log(err)
         res.redirect('/')
