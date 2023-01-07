@@ -42,10 +42,11 @@ const postSignUp = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({where: {email}});
     if (!user) {
         let hashedPassword = await bcrypt.hash(password, 12);
-        await User.create({
+        const newUser = await User.create({
             email,
             password: hashedPassword
         })
+        newUser.createCart({userId: newUser.id})
         return res.redirect('/login')
     }
 
