@@ -52,9 +52,9 @@ const postSignUp = asyncHandler(async (req, res, next) => {
             subject: 'Sign Up Successfully',
             text: 'Thank you for Signing In have fun shopping!',
         }
-        
-        await sendMail(options)
-        return res.redirect('/login')
+
+        res.redirect('/login')
+        return sendMail(options)
     }
 
     return res.redirect('/signup')
