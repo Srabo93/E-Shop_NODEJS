@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
+const sendMail = require('../utils/sendEmail');
 
 const getLogin = asyncHandler(async (req, res, next) => {
     res.render('auth/login', {
@@ -35,15 +36,24 @@ const getSignUp = asyncHandler(async (req, res, next) => {
 
 const postSignUp = asyncHandler(async (req, res, next) => {
     const {email, password, repeatedPassword} = req.body
-
     const user = await User.findOne({where: {email}});
+
     if (!user) {
         let hashedPassword = await bcrypt.hash(password, 12);
         const newUser = await User.create({
             email,
             password: hashedPassword
         })
+
         newUser.createCart({userId: newUser.id})
+
+        let options = {
+            email,
+            subject: 'Sign Up Successfully',
+            text: 'Thank you for Signing In have fun shopping!',
+        }
+        
+        await sendMail(options)
         return res.redirect('/login')
     }
 
