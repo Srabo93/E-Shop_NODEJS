@@ -3,11 +3,9 @@ const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 
 const getLogin = asyncHandler(async (req, res, next) => {
-
     res.render('auth/login', {
         pageTitle: 'Login',
         path: '/login',
-        isAuthenticated: req.isLoggedIn
     })
 })
 
@@ -32,7 +30,6 @@ const getSignUp = asyncHandler(async (req, res, next) => {
     res.render('auth/signUp', {
         pageTitle: 'Sign Up',
         path: '/signup',
-        isAuthenticated: req.isLoggedIn
     })
 })
 

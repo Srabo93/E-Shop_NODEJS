@@ -6,7 +6,6 @@ const getAddProduct = asyncHandler(async (req, res, next) => {
         pageTitle: 'Add Product',
         path: '/admin/add-product',
         editing: false,
-        isAuthenticated: req.isLoggedIn
     })
 })
 
@@ -17,7 +16,6 @@ const getProducts = asyncHandler(async (req, res, next) => {
         hasProducts: products.length > 0,
         pageTitle: 'Products List',
         path: '/admin/products-list',
-        isAuthenticated: req.isLoggedIn
     })
 })
 
@@ -47,7 +45,6 @@ const getEditProduct = asyncHandler(async (req, res, next) => {
         path: '/admin/edit-product',
         editing: editMode,
         product,
-        isAuthenticated: req.isLoggedIn
     })
 })
 

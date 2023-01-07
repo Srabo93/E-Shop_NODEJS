@@ -8,7 +8,6 @@ const getIndex = asyncHandler(async (req, res, next) => {
         pageTitle: 'Shop',
         path: '/',
         hasProducts: products.length > 0,
-        isAuthenticated: req.isLoggedIn
     })
 })
 
@@ -27,7 +26,6 @@ const getOrders = asyncHandler(async (req, res, next) => {
         path: '/orders',
         pageTitle: 'Shop|My Orders',
         orders,
-        isAuthenticated: req.isLoggedIn
     })
 })
 
@@ -52,7 +50,6 @@ const getProducts = asyncHandler(async (req, res, next) => {
         pageTitle: 'Shop|Products',
         path: '/product-list',
         hasProducts: products.length > 0,
-        isAuthenticated: req.isLoggedIn
     });
 
 })
@@ -64,7 +61,6 @@ const getProduct = asyncHandler(async (req, res, next) => {
         product,
         pageTitle: 'Shop|Product',
         path: '/product-list',
-        isAuthenticated: req.isLoggedIn
     })
 
 })
@@ -85,7 +81,6 @@ const getCart = asyncHandler(async (req, res, next) => {
         path: '/cart',
         cartItems: products,
         cartTotal,
-        isAuthenticated: req.isLoggedIn
     })
 })
 
@@ -129,7 +124,6 @@ const getCheckout = asyncHandler(async (req, res, next) => {
     res.render('shop/checkout', {
         pageTitle: 'Shop|Checkout',
         path: '/checkout',
-        isAuthenticated: req.isLoggedIn
     })
 })
 
