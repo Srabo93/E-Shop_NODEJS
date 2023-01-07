@@ -55,9 +55,12 @@ app.use(async (req, res, next) => {
     if (!req.session.user) {
         return next();
     }
-
     req.user = await User.findByPk(req.session.user.id);
+    next();
+})
 
+app.use(async (req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn;
     next();
 })
 
