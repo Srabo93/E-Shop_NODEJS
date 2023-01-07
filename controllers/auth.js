@@ -12,9 +12,20 @@ const getLogin = asyncHandler(async (req, res, next) => {
 })
 
 const postLogin = asyncHandler(async (req, res, next) => {
-    req.session.isLoggedIn = true;
-    req.session.user = await User.findByPk(1)
-    res.redirect('/')
+    const {email, password} = req.body
+
+    const user = await User.findOne({where: {email}});
+
+    if (!user) {
+        return res.redirect('/signup')
+    }
+    const checkPasswords = await bcrypt.compare(password, user.password);
+
+    if (checkPasswords) {
+        req.session.isLoggedIn = true;
+        req.session.user = user
+        return res.redirect('/')
+    }
 })
 
 const getSignUp = asyncHandler(async (req, res, next) => {
