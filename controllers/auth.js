@@ -72,10 +72,18 @@ const getLogout = asyncHandler(async (req, res, next) => {
     });
 })
 
+const getResetPassword = asyncHandler(async (req, res, next) => {
+    res.render('auth/reset-password', {
+        path: '/reset-password',
+        pageTitle: 'Reset Password',
+    })
+})
+
 module.exports = {
     getLogin,
     postLogin,
     getLogout,
     getSignUp,
-    postSignUp
+    postSignUp,
+    getResetPassword
 }
