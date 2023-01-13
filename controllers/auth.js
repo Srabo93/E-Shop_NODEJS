@@ -22,9 +22,9 @@ const postLogin = asyncHandler(async (req, res, next) => {
 
     if (checkPasswords) {
         req.session.isLoggedIn = true;
-        req.session.user = user
-        return res.redirect('/')
+        req.session.user = {email: user.email, id: user.id}
     }
+    res.redirect('/')
 })
 
 const getSignUp = asyncHandler(async (req, res, next) => {

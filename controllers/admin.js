@@ -70,4 +70,11 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
     res.redirect('/admin/products-list')
 })
 
-module.exports = {getAddProduct, postAddProduct, getProducts, getEditProduct, postEditProduct, deleteProduct}
+module.exports = {
+    getAddProduct,
+    postAddProduct,
+    getProducts,
+    getEditProduct,
+    postEditProduct,
+    deleteProduct
+}

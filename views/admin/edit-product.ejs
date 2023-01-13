@@ -23,6 +23,7 @@
                    class="form-label">Image</label>
             <input type="file" name="imgUrl" id="imgUrl" class="form-control" value="<%= editing ? product.imgUrl : ''
             %>">
+            <input type="hidden" name="csrfToken" value="<%= csrfToken %>">
             <% if (editing) { %>
                 <input type="hidden" value="<%= product.id %>" name="productId">
             <% } %>
