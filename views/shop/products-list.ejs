@@ -18,7 +18,9 @@
                     <p class="lead"><%= product.description %></p>
                     <div class="d-flex justify-content-start align-content-center">
                         <a href="/products/<%= product.id %>" class="btn btn-warning">Details</a>
-                        <%- include('../includes/add-to-cart.ejs',{product:product}) %>
+                        <% if(isAuthenticated){ %>
+                            <%- include('../includes/add-to-cart.ejs',{product:product}) %>
+                        <% } %>
                     </div>
                 </div>
                 <div class="col-md-3">Potentielle Werbung</div>

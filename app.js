@@ -60,6 +60,11 @@ app.use(async (req, res, next) => {
 })
 
 app.use(async (req, res, next) => {
+    if (!req.session.user) {
+        res.locals.csrfToken = ''
+        res.locals.isAuthenticated = false;
+        return next();
+    }
     res.locals.csrfToken = req.session.csrfToken;
     res.locals.isAuthenticated = req.session.isLoggedIn;
     next();

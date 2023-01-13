@@ -13,7 +13,9 @@
             <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
             <p class="lead">$<%= product.price %></p>
             <p class="lead"><%= product.description %></p>
-            <%- include('../includes/add-to-cart.ejs') %>
+            <% if(isAuthenticated) { %>
+                <%- include('../includes/add-to-cart.ejs') %>
+            <% } %>
         </div>
         <div class="col-md-3">Potentielle Werbung</div>
     </div>
