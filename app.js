@@ -6,6 +6,7 @@ const sequelize = require('./config/database')
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin')
 const authRoutes = require('./routes/auth')
+const {generateCSRFToken} = require("./middlewares/auth");
 const {send404Page} = require("./controllers/error");
 
 
@@ -58,8 +59,10 @@ app.use(async (req, res, next) => {
     req.user = await User.findByPk(req.session.user.id);
     next();
 })
-
+//TODO: After Login direct happens before res.locals can get set
+app.use(generateCSRFToken)
 app.use(async (req, res, next) => {
+    res.locals.csrfToken = req.session.csrfToken;
     res.locals.isAuthenticated = req.session.isLoggedIn;
     next();
 })

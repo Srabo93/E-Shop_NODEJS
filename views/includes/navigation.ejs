@@ -23,12 +23,14 @@
                         <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/orders">My Orders</a>
                     </li>
                 <% } %>
-                <li class="nav-item">
-                    <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/signup">Sign Up</a>
-                </li>
+                <% if (!isAuthenticated) { %>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/signup">Sign Up</a>
+                    </li>
+                <% } %>
                 <% if(isAuthenticated) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
