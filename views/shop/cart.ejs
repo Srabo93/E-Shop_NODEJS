@@ -43,6 +43,7 @@
             <div class="d-flex">
                 <form action="/create-order" method="post">
                     <button type="submit" class="btn btn-sm btn-primary">Order Now!</button>
+                    <%- include('../includes/csrfToken.ejs') %>
                 </form>
             </div>
         </div>

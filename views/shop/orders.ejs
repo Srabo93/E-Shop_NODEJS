@@ -7,10 +7,10 @@
 <main class="container my-4">
     <% if (orders.length > 0) { %>
         <div class="list-group">
-            <% for (let order of orders) { %>
+            <% orders.forEach((order,i) => { %>
                 <a href="#" class="list-group-item list-group-item-action mb-5 shadow-sm">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Order Nr. <%= order.id %></h5>
+                        <h5 class="mb-1">Order Nr. <%= i+1 %></h5>
                         <small><%= order.createdAt.toLocaleString() %></small>
                         <p>Total: $<%= order.dataValues.orderTotal %></p>
                     </div>
@@ -26,7 +26,7 @@
                         </div>
                     <% }) %>
                 </a>
-            <% } %>
+            <% }) %>
         </div>
     <% } else { %>
         <h1>NOTHING HERE</h1>
