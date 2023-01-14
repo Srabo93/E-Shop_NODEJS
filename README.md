@@ -6,9 +6,10 @@ Simple E-commerce Shop
 
 .env \
 
-````
+```
 PORT=
 SESSION_SECRET=
+TOKEN_SECRET=
 
 SMTP_HOST=
 SMTP_PORT=
@@ -17,4 +18,4 @@ SMTP_PASSWORD=
 
 FROM_NAME=
 FROM_EMAIL=
-```` 
+```
