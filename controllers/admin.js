@@ -22,8 +22,6 @@ const getProducts = asyncHandler(async (req, res, next) => {
 });
 
 const postAddProduct = asyncHandler(async (req, res, next) => {
-  //Todo: check for csrfToken
-
   const { title, description, price, imgUrl } = req.body;
 
   await req.user.createProduct({
@@ -54,8 +52,6 @@ const getEditProduct = asyncHandler(async (req, res, next) => {
 });
 
 const postEditProduct = asyncHandler(async (req, res, next) => {
-  //Todo: check for csrfToken
-
   const { productId, title, description, price, imgUrl } = req.body;
 
   const product = await Product.findByPk(productId);
@@ -70,8 +66,6 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
 });
 
 const deleteProduct = asyncHandler(async (req, res, next) => {
-  //Todo: check for csrfToken
-
   const { productId } = req.body;
 
   const product = await Product.findByPk(productId);

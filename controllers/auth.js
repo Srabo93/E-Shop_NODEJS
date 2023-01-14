@@ -12,7 +12,6 @@ const getLogin = asyncHandler(async (req, res, next) => {
 });
 
 const postLogin = asyncHandler(async (req, res, next) => {
-  //Todo: ask for csrfToken
   const { email, password } = req.body;
 
   const user = await User.findOne({ where: { email } });
@@ -42,8 +41,6 @@ const getSignUp = asyncHandler(async (req, res, next) => {
 });
 
 const postSignUp = asyncHandler(async (req, res, next) => {
-  //Todo: ask for csrfToken
-
   const { email, password, repeatedPassword } = req.body;
   const user = await User.findOne({ where: { email } });
 
@@ -70,8 +67,6 @@ const postSignUp = asyncHandler(async (req, res, next) => {
 });
 
 const getLogout = asyncHandler(async (req, res, next) => {
-  //Todo: ask for csrfToken
-
   req.session.destroy((err) => {
     console.log(err);
     res.redirect("/");

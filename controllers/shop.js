@@ -34,7 +34,6 @@ const getOrders = asyncHandler(async (req, res, next) => {
 });
 
 const postOrder = asyncHandler(async (req, res, next) => {
-  //Todo: check for csrfToken
   const cart = await req.user.getCart();
   const products = await cart.getProducts();
   const order = await req.user.createOrder();
@@ -93,8 +92,6 @@ const getCart = asyncHandler(async (req, res, next) => {
 });
 
 const postCart = asyncHandler(async (req, res, next) => {
-  //Todo: check for csrfToken
-
   const { productId } = req.body;
   let cart = await req.user.getCart();
   let cartProducts = await cart.getProducts({ where: { id: productId } });
@@ -121,8 +118,6 @@ const postCart = asyncHandler(async (req, res, next) => {
 });
 
 const postDeleteCartItem = asyncHandler(async (req, res, next) => {
-  //Todo: check for csrfToken
-
   const { productId } = req.body;
   const cart = await req.user.getCart();
   const product = await cart.getProducts({ where: { id: productId } });
