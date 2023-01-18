@@ -11,10 +11,12 @@ const getAddProduct = asyncHandler(async (req, res, next) => {
 });
 
 const getProducts = asyncHandler(async (req, res, next) => {
-  const products = await Product.findAll();
+  const products = await req.user.getProducts();
+  const hasProducts = await req.user.countProducts();
+
   res.render("admin/products-list", {
     products,
-    hasProducts: products.length > 0,
+    hasProducts,
     pageTitle: "Products List",
     path: "/admin/products-list",
     csrfToken: req.session.csrfToken,
@@ -68,8 +70,8 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
 const deleteProduct = asyncHandler(async (req, res, next) => {
   const { productId } = req.body;
 
-  const product = await Product.findByPk(productId);
-  await product.destroy();
+  await req.user.removeProduct(productId);
+
   res.redirect("/admin/products-list");
 });
 
