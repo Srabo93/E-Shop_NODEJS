@@ -20,9 +20,9 @@
             </tr>
             </thead>
             <tbody>
-            <% for (let product of products) { %>
+            <% products.forEach((product,i)=>{ %>
                 <tr>
-                    <th scope="row"><%= product.id %></th>
+                    <th scope="row"><%= i+1 %></th>
                     <td><%= product.title %></td>
                     <td><img class="img-thumbnail"
                              src="<%= product.image %>">
@@ -40,7 +40,7 @@
                         </form>
                     </td>
                 </tr>
-            <% } %>
+            <% }) %>
             </tbody>
         </table>
     <% } else { %>
