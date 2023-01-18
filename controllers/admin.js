@@ -58,6 +58,10 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
 
   const product = await Product.findByPk(productId);
 
+  if (product.userId !== req.user.id) {
+    return res.redirect("/");
+  }
+
   product.title = title ? title : product.title;
   product.description = description ? description : product.description;
   product.price = price ? price : product.price;
