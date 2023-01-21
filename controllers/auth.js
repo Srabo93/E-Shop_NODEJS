@@ -10,6 +10,11 @@ const getLogin = asyncHandler(async (req, res, next) => {
     pageTitle: "Login",
     path: "/login",
     csrfToken: req.session.csrfToken,
+    errors: false,
+    invalidInput: {
+      email: "",
+      password: "",
+    },
   });
 });
 
@@ -18,9 +23,6 @@ const postLogin = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ where: { email } });
 
-  if (!user) {
-    return res.redirect("/signup");
-  }
   const checkPasswords = await bcrypt.compare(password, user.password);
 
   if (checkPasswords) {

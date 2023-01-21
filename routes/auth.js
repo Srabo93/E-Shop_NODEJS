@@ -1,5 +1,9 @@
 const express = require("express");
-const { userSignUpRules, validate } = require("../middlewares/validations");
+const {
+  userSignUpRules,
+  userLoginRules,
+  validate,
+} = require("../middlewares/validations");
 const {
   postLogin,
   getLogin,
@@ -13,7 +17,7 @@ const {
 } = require("../controllers/auth");
 const router = express.Router();
 
-router.route("/login").get(getLogin).post(postLogin);
+router.route("/login").get(getLogin).post(userLoginRules, validate, postLogin);
 router.route("/logout").get(getLogout);
 router
   .route("/signup")

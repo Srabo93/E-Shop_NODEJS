@@ -38,15 +38,16 @@ const userLoginRules = [
     .trim()
     .isEmail()
     .normalizeEmail()
-    .withMessage("Please enter a valid email")
+    .withMessage("Email or Password is not valid")
     .custom((value) => {
       return User.findOne({ where: { email: value } }).then((user) => {
         if (!user) {
-          return Promise.reject("No such Email registered");
+          res.redirect("/signup");
+          return Promise.reject("Not such Email is registered");
         }
       });
     }),
-  body("password", "Password must be in range of 5 to 18 characters")
+  body("password", "Email or Password is not valid")
     .trim()
     .isLength({ min: 5, max: 18 }),
 ];
@@ -57,21 +58,37 @@ const validate = (req, res, next) => {
   if (errors.isEmpty()) {
     return next();
   }
-
-  return res.status(422).render("auth/signUp", {
-    pageTitle: "E-Shop",
-    path: req.originalUrl,
-    csrfToken: req.session.csrfToken,
-    errors: errors.array()[0].msg,
-    invalidInput: {
-      email: req.body.email,
-      password: req.body.password,
-      repeatedPassword: req.body.repeatedPassword,
-    },
-  });
+  switch (req.originalUrl) {
+    case "/signup":
+      return res.status(422).render("auth/signUp", {
+        pageTitle: "Sign Up",
+        path: req.originalUrl,
+        csrfToken: req.session.csrfToken,
+        errors: errors.array()[0].msg,
+        invalidInput: {
+          email: req.body.email,
+          password: req.body.password,
+          repeatedPassword: req.body.repeatedPassword,
+        },
+      });
+      break;
+    case "/login":
+      return res.status(422).render("auth/login", {
+        pageTitle: "Login",
+        path: req.originalUrl,
+        csrfToken: req.session.csrfToken,
+        errors: errors.array()[0].msg,
+        invalidInput: {
+          email: req.body.email,
+          password: req.body.password,
+        },
+      });
+      break;
+  }
 };
 
 module.exports = {
   userSignUpRules,
+  userLoginRules,
   validate,
 };
