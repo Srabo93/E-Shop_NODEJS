@@ -26,7 +26,7 @@ const postLogin = asyncHandler(async (req, res, next) => {
   if (checkPasswords) {
     req.session.isLoggedIn = true;
     req.session.user = { email: user.email, id: user.id };
-    await req.session.save((err) => {
+    req.session.save((err) => {
       if (err) return next(err);
 
       res.redirect("/");
@@ -39,11 +39,18 @@ const getSignUp = asyncHandler(async (req, res, next) => {
     pageTitle: "Sign Up",
     path: "/signup",
     csrfToken: req.session.csrfToken,
+    errors: false,
+    invalidInput: {
+      email: "",
+      password: "",
+      repeatedPassword: "",
+    },
   });
 });
 
 const postSignUp = asyncHandler(async (req, res, next) => {
-  const { email, password, repeatedPassword } = req.body;
+  const { email, password } = req.body;
+
   const user = await User.findOne({ where: { email } });
 
   if (!user) {
