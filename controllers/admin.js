@@ -1,15 +1,6 @@
 const Product = require("../models/Product");
 const asyncHandler = require("express-async-handler");
 
-const getAddProduct = asyncHandler(async (req, res, next) => {
-  res.render("admin/edit-product", {
-    pageTitle: "Add Product",
-    path: "/admin/add-product",
-    editing: false,
-    csrfToken: req.session.csrfToken,
-  });
-});
-
 const getProducts = asyncHandler(async (req, res, next) => {
   const products = await req.user.getProducts();
   const hasProducts = await req.user.countProducts();
@@ -20,6 +11,17 @@ const getProducts = asyncHandler(async (req, res, next) => {
     pageTitle: "Products List",
     path: "/admin/products-list",
     csrfToken: req.session.csrfToken,
+  });
+});
+
+const getAddProduct = asyncHandler(async (req, res, next) => {
+  res.render("admin/edit-product", {
+    pageTitle: "Add Product",
+    path: "/admin/add-product",
+    editing: false,
+    csrfToken: req.session.csrfToken,
+    errors: false,
+    product: "",
   });
 });
 
@@ -49,6 +51,7 @@ const getEditProduct = asyncHandler(async (req, res, next) => {
     path: "/admin/edit-product",
     editing: editMode,
     product,
+    errors: false,
     csrfToken: req.session.csrfToken,
   });
 });

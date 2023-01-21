@@ -52,9 +52,24 @@ const userLoginRules = [
     .isLength({ min: 5, max: 18 }),
 ];
 
+const productRules = [
+  body("title")
+    .trim()
+    .isAlphanumeric()
+    .withMessage("Invalid Value, Title can contain Alphanumeric characters")
+    .isLength({ min: 3, max: 250 }),
+  body("price").isFloat().withMessage("Number must be of type Float"),
+  body("description")
+    .trim()
+    .isLength({ min: 1, max: 400 })
+    .withMessage("Description must be min Lenght 1 and Max Length 400"),
+  body("imgUrl").isURL().withMessage("Enter Valid URL"),
+];
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
-
+  console.log("AAAAAAAAAAAAaa", req.originalUrl);
+  console.log("ERRORS", errors);
   if (errors.isEmpty()) {
     return next();
   }
@@ -77,10 +92,40 @@ const validate = (req, res, next) => {
         pageTitle: "Login",
         path: req.originalUrl,
         csrfToken: req.session.csrfToken,
-        errors: errors.array()[0].msg,
+        errors: errors.array().msg,
         invalidInput: {
           email: req.body.email,
           password: req.body.password,
+        },
+      });
+      break;
+    case "/admin/add-product":
+      return res.status(422).render("admin/edit-product", {
+        pageTitle: "Add Product",
+        path: req.originalUrl,
+        csrfToken: req.session.csrfToken,
+        errors: errors.array()[0].msg,
+        editing: false,
+        product: {
+          title: req.body.title,
+          description: req.body.description,
+          imgUrl: req.body.imgUrl,
+          price: req.body.price,
+        },
+      });
+      break;
+    case "/admin/edit-product":
+      return res.status(422).render("admin/edit-product", {
+        pageTitle: "Add Product",
+        path: req.originalUrl,
+        csrfToken: req.session.csrfToken,
+        errors: errors.array()[0].msg,
+        editing: true,
+        product: {
+          title: req.body.title,
+          description: req.body.description,
+          imgUrl: req.body.imgUrl,
+          price: req.body.price,
         },
       });
       break;
@@ -90,5 +135,6 @@ const validate = (req, res, next) => {
 module.exports = {
   userSignUpRules,
   userLoginRules,
+  productRules,
   validate,
 };
