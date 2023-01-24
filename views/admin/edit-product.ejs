@@ -11,7 +11,7 @@
         <%=errors %>
         </div>
     <% } %>
-    <form action="<%= editing ? '/admin/edit-product' : '/admin/add-product' %>" method="POST">
+    <form action="<%= editing ? '/admin/edit-product' : '/admin/add-product' %>" method="POST" enctype="multipart/form-data">
         <div class="m-2" style="max-width: 80%">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" id="title" value="<%= editing || product ? product.title : '' %>"
@@ -24,9 +24,9 @@
                    class="form-label">Description</label>
             <textarea name="description" id="description" class="form-control"
                       rows="3"> <%= editing || product ? product.description : '' %></textarea>
-            <label for="imgUrl"
+            <label for="image"
                    class="form-label">Image</label>
-            <input type="file" name="imgUrl" id="imgUrl" class="form-control" value="<%= editing || product ? product.imgUrl : '' %>">
+            <input type="file" name="image" id="image" class="form-control">
             <%- include('../includes/csrfToken.ejs') %>
             <% if (editing) { %>
                 <input type="hidden" value="<%= product.id %>" name="productId">

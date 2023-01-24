@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const multer = require("multer");
 const path = require("path");
 const sequelize = require("./config/database");
 const shopRoutes = require("./routes/shop");
@@ -10,6 +11,7 @@ const {
   authenticationHandler,
   csurfTokenHandler,
 } = require("./middlewares/auth");
+const { fileStorage, fileFilter } = require("./utils/multerconfig");
 const { send404Page, send500Page } = require("./controllers/error");
 
 const app = express();
@@ -45,6 +47,9 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
+);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
@@ -56,7 +61,6 @@ app.use(
     resave: false, // we support the touch method so per the express-session docs this should be set to false
   })
 );
-
 app.use(authenticationHandler);
 app.use(csurfTokenHandler);
 
@@ -70,3 +74,6 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => console.log("app is listening"));
+/**
+ * Todo: Multer upload validation, Error handling
+ */

@@ -54,8 +54,9 @@ const userLoginRules = [
 
 const productRules = [
   body("title")
-    .trim()
-    .isAlphanumeric()
+    .ltrim()
+    .rtrim()
+    .isAlphanumeric("en-US", { ignore: " -" })
     .withMessage("Invalid Value, Title can contain Alphanumeric characters")
     .isLength({ min: 3, max: 250 }),
   body("price").isFloat().withMessage("Number must be of type Float"),
@@ -63,13 +64,11 @@ const productRules = [
     .trim()
     .isLength({ min: 1, max: 400 })
     .withMessage("Description must be min Lenght 1 and Max Length 400"),
-  body("imgUrl").isURL().withMessage("Enter Valid URL"),
 ];
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
-  console.log("AAAAAAAAAAAAaa", req.originalUrl);
-  console.log("ERRORS", errors);
+
   if (errors.isEmpty()) {
     return next();
   }

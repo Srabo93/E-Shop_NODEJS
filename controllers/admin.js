@@ -30,15 +30,16 @@ const getAddProduct = asyncHandler(async (req, res, next) => {
 });
 
 const postAddProduct = asyncHandler(async (req, res, next) => {
-  const { title, description, price, imgUrl } = req.body;
+  const { title, description, price } = req.body;
+
   try {
     await req.user.createProduct({
       title,
       price,
-      image: imgUrl,
+      image: req.file.path,
       description,
     });
-    res.redirect("/");
+    res.redirect("/admin/products-list");
   } catch (error) {
     next(error);
   }

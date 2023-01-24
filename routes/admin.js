@@ -1,5 +1,6 @@
 const express = require("express");
 const { isAuthenticated } = require("../middlewares/auth");
+const { productRules, validate } = require("../middlewares/validations");
 const router = express.Router();
 const {
   getAddProduct,
@@ -9,7 +10,6 @@ const {
   postEditProduct,
   deleteProduct,
 } = require("../controllers/admin");
-const { productRules, validate } = require("../middlewares/validations");
 
 router
   .route("/add-product")
