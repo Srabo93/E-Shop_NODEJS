@@ -15,18 +15,22 @@
         <div class="m-2" style="max-width: 80%">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" id="title" value="<%= editing || product ? product.title : '' %>"
-                   class="form-control">
+                   class="form-control" required>
             <label for="price"
                    class="form-label">Price</label>
             <input type="number" step="0.01" name="price" id="price" class="form-control" value="<%= editing || product ?
-                    product.price : '' %>">
+                    product.price : '' %>" required>
             <label for="description"
                    class="form-label">Description</label>
             <textarea name="description" id="description" class="form-control"
                       rows="3"> <%= editing || product ? product.description : '' %></textarea>
             <label for="image"
                    class="form-label">Image</label>
-            <input type="file" name="image" id="image" class="form-control">
+            <% if(editing) { %>
+                <input type="file" name="image" id="image" class="form-control">
+            <% } else { %>  
+                <input type="file" name="image" id="image" class="form-control" required>
+             <% } %> 
             <%- include('../includes/csrfToken.ejs') %>
             <% if (editing) { %>
                 <input type="hidden" value="<%= product.id %>" name="productId">

@@ -69,7 +69,7 @@ const getEditProduct = asyncHandler(async (req, res, next) => {
 });
 
 const postEditProduct = asyncHandler(async (req, res, next) => {
-  const { productId, title, description, price, imgUrl } = req.body;
+  const { productId, title, description, price } = req.body;
   try {
     const product = await Product.findByPk(productId);
 
@@ -80,7 +80,7 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
     product.title = title ? title : product.title;
     product.description = description ? description : product.description;
     product.price = price ? price : product.price;
-    product.image = imgUrl ? imgUrl : product.image;
+    product.image = req.file ? req.file.path : product.image;
     await product.save();
 
     res.redirect("/admin/products-list");
