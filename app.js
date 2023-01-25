@@ -45,12 +45,13 @@ sequelize.sync();
 /* Set View Engine EJS */
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
-app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -74,6 +75,3 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => console.log("app is listening"));
-/**
- * Todo: Multer upload validation, Error handling
- */
