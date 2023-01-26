@@ -46,7 +46,7 @@ sequelize.sync();
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/data/images", express.static(path.join(__dirname, "/data/images")));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
@@ -70,8 +70,8 @@ app.use(authRoutes);
 app.use("/admin", adminRoutes);
 app.get("/500", send500Page);
 app.use(send404Page);
-// app.use((error, req, res, next) => {
-//   res.status(500).render("500", { pageTitle: "Error", path: "/500" });
-// });
+app.use((error, req, res, next) => {
+  res.status(500).render("500", { pageTitle: "Error", path: "/500" });
+});
 
 app.listen(process.env.PORT, () => console.log("app is listening"));
