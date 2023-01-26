@@ -8,7 +8,7 @@
     <% if (orders.length > 0) { %>
         <div class="list-group">
             <% orders.forEach((order,i) => { %>
-                <a href="#" class="list-group-item list-group-item-action mb-5 shadow-sm">
+                <a href="/orders/<%=order.id %>" class="list-group-item list-group-item-action mb-5 shadow-sm">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Order Nr. <%= i+1 %></h5>
                         <small><%= order.createdAt.toLocaleString() %></small>

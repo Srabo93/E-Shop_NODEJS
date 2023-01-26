@@ -1,5 +1,9 @@
 const Product = require("../models/Product");
 const asyncHandler = require("express-async-handler");
+const fs = require("fs");
+const path = require("path");
+const PDFDocument = require("pdfkit");
+const { createInvoice } = require("../utils/createInvoicePDF");
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
@@ -167,6 +171,28 @@ const getCheckout = asyncHandler(async (req, res, next) => {
   });
 });
 
+const getInvoice = asyncHandler(async (req, res, next) => {
+  const { orderId } = req.params;
+  const invoiceName = `invoice-${orderId}.pdf`;
+  const invoicePath = path.join("data", "invoices", invoiceName);
+  const hasOrder = await req.user.hasOrder(orderId);
+
+  if (!hasOrder) {
+    return next(new Error("Order not found"));
+  }
+
+  try {
+    const order = await req.user.getOrders({
+      where: { id: orderId },
+      include: ["products"],
+    });
+
+    createInvoice(order, invoicePath, res);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = {
   getProducts,
   getIndex,
@@ -177,4 +203,5 @@ module.exports = {
   postCart,
   postDeleteCartItem,
   postOrder,
+  getInvoice,
 };

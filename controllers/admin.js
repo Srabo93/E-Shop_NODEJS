@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const asyncHandler = require("express-async-handler");
+const { deleteFile } = require("../utils/fileHelper");
 
 const getProducts = asyncHandler(async (req, res, next) => {
   try {
@@ -80,7 +81,11 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
     product.title = title ? title : product.title;
     product.description = description ? description : product.description;
     product.price = price ? price : product.price;
-    product.image = req.file ? req.file.path : product.image;
+    if (req.file) {
+      deleteFile(product.image);
+      product.image = req.file.path;
+    }
+
     await product.save();
 
     res.redirect("/admin/products-list");
@@ -91,7 +96,13 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
 
 const deleteProduct = asyncHandler(async (req, res, next) => {
   const { productId } = req.body;
+
   try {
+    const [product] = await req.user.getProducts({
+      where: { id: productId },
+    });
+
+    deleteFile(product.image);
     await req.user.removeProduct(productId);
 
     res.redirect("/admin/products-list");

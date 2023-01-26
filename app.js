@@ -70,8 +70,8 @@ app.use(authRoutes);
 app.use("/admin", adminRoutes);
 app.get("/500", send500Page);
 app.use(send404Page);
-app.use((error, req, res, next) => {
-  res.status(500).render("500", { pageTitle: "Error", path: "/500" });
-});
+// app.use((error, req, res, next) => {
+//   res.status(500).render("500", { pageTitle: "Error", path: "/500" });
+// });
 
 app.listen(process.env.PORT, () => console.log("app is listening"));
