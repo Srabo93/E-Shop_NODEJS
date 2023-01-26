@@ -4,7 +4,6 @@ Simple E-commerce Shop
 
 ### Dev Setup
 
-Folders: mkdir images
 .env \
 
 ```
