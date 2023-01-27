@@ -1,19 +1,17 @@
 <nav>
   <ul class="pagination justify-content-center">
-    <li class="page-item <%= pagination.prev ?? "disabled" %>">
-      <a class="page-link">Previous</a>
+    <li class="page-item <%= pagination.prev.page === 0 ? "disabled":"" %>">
+      <a class="page-link" href="<%= pageRoute %>?page=<%=pagination.prev.page %>">Previous</a>
     </li>
     <% for (let index = 0; index < pagination.info.pagesTotal; index++) { %>
-      <li class="page-item active">
-        <a class="page-link" href="#">
+      <li class="page-item <%= pagination.info.currentPage === index + 1 ? "active" : "" %> ">
+        <a class="page-link" href="<%= pageRoute %>?page=<%= index + 1 %> ">
           <%= index + 1 %> 
         </a>
       </li>
    <% } %> 
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item <%= pagination.next ?? "disabled" %>">
-      <a class="page-link" href="#">Next</a>
+    <li class="page-item <%= pagination.next.page > pagination.info.pagesTotal ? "disabled":"" %>">
+      <a class="page-link" href="<%= pageRoute %>?page=<%=pagination.next.page %>">Next</a>
     </li>
   </ul>
 </nav>

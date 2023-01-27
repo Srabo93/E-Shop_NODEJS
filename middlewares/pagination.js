@@ -6,17 +6,18 @@ const advancedResults = (model) => async (req, res, next) => {
   const endIndex = page * limit;
 
   const results = await model.findAll({ offset: startIndex, limit });
-  const pagesTotal = Math.ceil(
-    parseInt(total, 10) / parseInt(results.length, 10)
-  );
-
+  const pagesTotal = Math.ceil(parseInt(total, 10) / 10);
   const pagination = {};
 
-  pagination.info = { pagesTotal };
+  pagination.info = { pagesTotal, currentPage: page };
 
   if (endIndex < total) {
     pagination.next = {
       page: page + 1,
+      limit,
+    };
+    pagination.prev = {
+      page: page - 1,
       limit,
     };
   }
@@ -26,6 +27,10 @@ const advancedResults = (model) => async (req, res, next) => {
       page: page - 1,
       limit,
     };
+    pagination.next = {
+      page: page + 1,
+      limit,
+    };
   }
 
   res.advancedResults = {
@@ -33,7 +38,6 @@ const advancedResults = (model) => async (req, res, next) => {
     pagination,
     data: results,
   };
-  //todo implement current page key pair, work on the view
   next();
 };
 

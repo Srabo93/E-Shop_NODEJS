@@ -30,6 +30,6 @@
     <% } else { %>
         <h1>No Products Found!</h1>
     <% } %>
-    <%- include('../includes/pagination.ejs') %> 
+    <%- include('../includes/pagination.ejs', {pageRoute: '/'}) %> 
 </main>
 <%- include('../includes/end.ejs') %>

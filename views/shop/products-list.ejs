@@ -29,7 +29,7 @@
     <% } else { %>
         <h1>No Products Found!</h1>
     <% } %>
-    <%- include('../includes/pagination.ejs',{pagination:pagination}) %> 
+    <%- include('../includes/pagination.ejs', {pageRoute: '/products'}) %> 
 
 </main>
 <%- include('../includes/end.ejs') %>

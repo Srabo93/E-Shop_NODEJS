@@ -1,3 +1,4 @@
+const Product = require("../models/Product");
 const express = require("express");
 const { isAuthenticated } = require("../middlewares/auth");
 const { advancedResults } = require("../middlewares/pagination");
@@ -14,9 +15,8 @@ const {
   postOrder,
   getInvoice,
 } = require("../controllers/shop");
-const Product = require("../models/Product");
 
-router.route("/").get(getIndex);
+router.route("/").get(advancedResults(Product), getIndex);
 
 router.route("/products").get(advancedResults(Product), getProducts);
 router.route("/products/:productId").get(getProduct);

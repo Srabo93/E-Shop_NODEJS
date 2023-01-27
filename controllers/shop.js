@@ -5,13 +5,15 @@ const { createInvoice } = require("../utils/createInvoicePDF");
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
-    // const products = await Product.findAll();
+    const products = res.advancedResults.data;
+    const pagination = res.advancedResults.pagination;
     res.render("shop/index", {
       products,
       pageTitle: "Shop",
       path: "/",
       hasProducts: products.length > 0,
       csrfToken: req.session.csrfToken,
+      pagination,
     });
   } catch (error) {
     next(error);
@@ -68,7 +70,7 @@ const getProducts = asyncHandler(async (req, res, next) => {
   try {
     const products = res.advancedResults.data;
     const pagination = res.advancedResults.pagination;
-    console.log(pagination);
+
     res.render("shop/products-list", {
       products,
       pageTitle: "Shop|Products",
