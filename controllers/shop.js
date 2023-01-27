@@ -1,13 +1,11 @@
 const Product = require("../models/Product");
 const asyncHandler = require("express-async-handler");
-const fs = require("fs");
 const path = require("path");
-const PDFDocument = require("pdfkit");
 const { createInvoice } = require("../utils/createInvoicePDF");
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    // const products = await Product.findAll();
     res.render("shop/index", {
       products,
       pageTitle: "Shop",
@@ -68,11 +66,14 @@ const postOrder = asyncHandler(async (req, res, next) => {
 
 const getProducts = asyncHandler(async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = res.advancedResults.data;
+    const pagination = res.advancedResults.pagination;
+    console.log(pagination);
     res.render("shop/products-list", {
       products,
       pageTitle: "Shop|Products",
       path: "/product-list",
+      pagination,
       hasProducts: products.length > 0,
       csrfToken: req.session.csrfToken,
     });
