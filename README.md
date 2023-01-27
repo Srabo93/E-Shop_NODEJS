@@ -4,6 +4,7 @@ Simple E-commerce Shop
 
 ### Dev Setup
 
+Needed Folder Structure: data/images && data/invoices
 .env \
 
 ```
