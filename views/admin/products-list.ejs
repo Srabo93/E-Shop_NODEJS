@@ -24,10 +24,11 @@
                 <tr>
                     <th scope="row"><%= i+1 %></th>
                     <td><%= product.title %></td>
-                    <td><img class="img-thumbnail"
+                    <td>
+                            <img style="max-width: 10rem;" class="img-thumbnail d-none d-sm-block"
                              src="/<%= product.image %>">
                     </td>
-                    <td><%= product.description %></td>
+                    <td><p class="d-none d-sm-block"><%= product.description.substring(0,50) %>...</p></td>
                     <td><strong>$<%= product.price %></strong></td>
                     <td>
                         <a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn btn-sm btn-secondary
