@@ -1,4 +1,4 @@
-const advancedResults = (model) => async (req, res, next) => {
+const shopResults = (model) => async (req, res, next) => {
   const total = await model.count();
   const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 10;
@@ -33,7 +33,7 @@ const advancedResults = (model) => async (req, res, next) => {
     };
   }
 
-  res.advancedResults = {
+  res.shopResults = {
     success: true,
     pagination,
     data: results,
@@ -41,4 +41,4 @@ const advancedResults = (model) => async (req, res, next) => {
   next();
 };
 
-module.exports = { advancedResults };
+module.exports = { shopResults };

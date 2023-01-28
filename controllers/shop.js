@@ -5,8 +5,8 @@ const { createInvoice } = require("../utils/createInvoicePDF");
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
-    const products = res.advancedResults.data;
-    const pagination = res.advancedResults.pagination;
+    const products = res.shopResults.data;
+    const pagination = res.shopResults.pagination;
     res.render("shop/index", {
       products,
       pageTitle: "Shop",

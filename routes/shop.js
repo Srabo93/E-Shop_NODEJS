@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 const express = require("express");
 const { isAuthenticated } = require("../middlewares/auth");
-const { advancedResults } = require("../middlewares/pagination");
+const { shopResults } = require("../middlewares/pagination");
 const router = express.Router();
 const {
   getProducts,
@@ -16,9 +16,8 @@ const {
   getInvoice,
 } = require("../controllers/shop");
 
-router.route("/").get(advancedResults(Product), getIndex);
-
-router.route("/products").get(advancedResults(Product), getProducts);
+router.route("/").get(shopResults(Product), getIndex);
+router.route("/products").get(shopResults(Product), getProducts);
 router.route("/products/:productId").get(getProduct);
 router
   .route("/cart")

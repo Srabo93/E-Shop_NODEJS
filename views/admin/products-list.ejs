@@ -3,32 +3,34 @@
 </head>
 
 <body>
-<%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/navigation.ejs') %>
 
 
-<main class="container my-3">
-    <% if (hasProducts) { %>
+    <main class="container my-3">
+        <% if (hasProducts) { %>
         <table class="table table-striped table-hover table align-middle">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Image</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Actions</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
             </thead>
             <tbody>
-            <% products.forEach((product,i)=>{ %>
+                <% products.forEach((product,i)=>{ %>
                 <tr>
                     <th scope="row"><%= i+1 %></th>
                     <td><%= product.title %></td>
                     <td>
-                            <img style="max-width: 10rem;" class="img-thumbnail d-none d-sm-block"
-                             src="/<%= product.image %>">
+                        <img style="max-width: 10rem;" class="img-thumbnail d-none d-sm-block"
+                            src="/<%= product.image %>">
                     </td>
-                    <td><p class="d-none d-sm-block"><%= product.description.substring(0,50) %>...</p></td>
+                    <td>
+                        <p class="d-none d-sm-block"><%= product.description.substring(0,50) %>...</p>
+                    </td>
                     <td><strong>$<%= product.price %></strong></td>
                     <td>
                         <a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn btn-sm btn-secondary
@@ -41,11 +43,11 @@
                         </form>
                     </td>
                 </tr>
-            <% }) %>
+                <% }) %>
             </tbody>
         </table>
-    <% } else { %>
+        <% } else { %>
         <h1>No Products Found!</h1>
-    <% } %>
-</main>
-<%- include('../includes/end.ejs') %>
+        <% } %>
+    </main>
+    <%- include('../includes/end.ejs') %>

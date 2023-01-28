@@ -3,22 +3,22 @@
 </head>
 
 <body>
-<%- include('../includes/navigation.ejs') %>
-<main class="container my-3 ">
-    <div class="row g-0">
-        <div class="col-lg-4 mw-50">
-            <img src="/<%= product.image %>" class="d-block p-5 mx-lg-auto img-fluid">
-        </div>
-        <div class="col-lg-5">
-            <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
-            <p class="lead">$<%= product.price %></p>
-            <p class="lead"><%= product.description %></p>
-            <% if(isAuthenticated) { %>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="container my-3 ">
+        <div class="row g-0">
+            <div class="col-lg-4 mw-50">
+                <img src="/<%= product.image %>" class="d-block p-5 mx-lg-auto img-fluid">
+            </div>
+            <div class="col-lg-5">
+                <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
+                <p class="lead">$<%= product.price %></p>
+                <p class="lead"><%= product.description %></p>
+                <% if(isAuthenticated) { %>
                 <%- include('../includes/add-to-cart.ejs') %>
-            <% } %>
+                <% } %>
+            </div>
+            <div class="col-lg-3">Potentielle Werbung</div>
         </div>
-        <div class="col-lg-3">Potentielle Werbung</div>
-    </div>
 
-</main>
-<%- include('../includes/end.ejs') %>
+    </main>
+    <%- include('../includes/end.ejs') %>
