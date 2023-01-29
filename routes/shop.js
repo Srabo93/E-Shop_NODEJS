@@ -1,7 +1,10 @@
 const Product = require("../models/Product");
 const express = require("express");
 const { isAuthenticated } = require("../middlewares/auth");
-const { shopResults } = require("../middlewares/pagination");
+const {
+  paginatedProducts,
+  paginatedUserOrders,
+} = require("../middlewares/pagination");
 const router = express.Router();
 const {
   getProducts,
@@ -16,8 +19,8 @@ const {
   getInvoice,
 } = require("../controllers/shop");
 
-router.route("/").get(shopResults(Product), getIndex);
-router.route("/products").get(shopResults(Product), getProducts);
+router.route("/").get(paginatedProducts(Product), getIndex);
+router.route("/products").get(paginatedProducts(Product), getProducts);
 router.route("/products/:productId").get(getProduct);
 router
   .route("/cart")
@@ -25,7 +28,7 @@ router
   .post(isAuthenticated, postCart);
 router.route("/cart-delete-item").post(isAuthenticated, postDeleteCartItem);
 router.route("/checkout").get(isAuthenticated, getCheckout);
-router.route("/orders").get(isAuthenticated, getOrders);
+router.route("/orders").get(isAuthenticated, paginatedUserOrders(), getOrders);
 router.route("/orders/:orderId").get(isAuthenticated, getInvoice);
 router.route("/create-order").post(isAuthenticated, postOrder);
 

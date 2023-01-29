@@ -1,44 +1,69 @@
-const shopResults = (model) => async (req, res, next) => {
-  const total = await model.count();
+const { createPagination } = require("../utils/paginationHelpers");
+
+const paginatedProducts = (model) => async (req, res, next) => {
   const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 10;
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
-  const results = await model.findAll({ offset: startIndex, limit });
-  const pagesTotal = Math.ceil(parseInt(total, 10) / 10);
-  const pagination = {};
+  try {
+    const total = await model.count();
+    const results = await model.findAll({ offset: startIndex, limit });
+    const pagesTotal = Math.ceil(parseInt(total, 10) / limit);
 
-  pagination.info = { pagesTotal, currentPage: page };
+    const pagination = await createPagination({
+      endIndex,
+      total,
+      page,
+      startIndex,
+      pagesTotal,
+      limit,
+    });
 
-  if (endIndex < total) {
-    pagination.next = {
-      page: page + 1,
-      limit,
+    res.paginatedProducts = {
+      success: true,
+      pagination,
+      data: results,
     };
-    pagination.prev = {
-      page: page - 1,
-      limit,
-    };
+  } catch (error) {
+    next(error);
   }
-
-  if (startIndex > 0) {
-    pagination.prev = {
-      page: page - 1,
-      limit,
-    };
-    pagination.next = {
-      page: page + 1,
-      limit,
-    };
-  }
-
-  res.shopResults = {
-    success: true,
-    pagination,
-    data: results,
-  };
   next();
 };
 
-module.exports = { shopResults };
+const paginatedUserOrders = (model) => async (req, res, next) => {
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 5;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  try {
+    const total = await req.user.countOrders();
+    const results = await req.user.getOrders({
+      include: ["products"],
+      offset: startIndex,
+      limit,
+    });
+    const pagesTotal = Math.ceil(parseInt(total, 10) / limit);
+
+    const pagination = await createPagination({
+      endIndex,
+      total,
+      page,
+      startIndex,
+      pagesTotal,
+      limit,
+    });
+
+    res.paginatedUserOrders = {
+      success: true,
+      pagination,
+      data: results,
+    };
+  } catch (error) {
+    next(error);
+  }
+  next();
+};
+
+module.exports = { paginatedProducts, paginatedUserOrders };

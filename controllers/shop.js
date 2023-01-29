@@ -5,8 +5,8 @@ const { createInvoice } = require("../utils/createInvoicePDF");
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
-    const products = res.shopResults.data;
-    const pagination = res.shopResults.pagination;
+    const products = res.paginatedProducts.data;
+    const pagination = res.paginatedProducts.pagination;
     res.render("shop/index", {
       products,
       pageTitle: "Shop",
@@ -22,7 +22,8 @@ const getIndex = asyncHandler(async (req, res, next) => {
 
 const getOrders = asyncHandler(async (req, res, next) => {
   try {
-    let orders = await req.user.getOrders({ include: ["products"] });
+    const orders = res.paginatedUserOrders.data;
+    const pagination = res.paginatedUserOrders.pagination;
 
     await orders.forEach((order) => {
       order.dataValues.orderTotal = 0;
@@ -40,6 +41,7 @@ const getOrders = asyncHandler(async (req, res, next) => {
       pageTitle: "Shop|My Orders",
       orders,
       csrfToken: req.session.csrfToken,
+      pagination,
     });
   } catch (error) {
     next(error);
@@ -68,8 +70,8 @@ const postOrder = asyncHandler(async (req, res, next) => {
 
 const getProducts = asyncHandler(async (req, res, next) => {
   try {
-    const products = res.advancedResults.data;
-    const pagination = res.advancedResults.pagination;
+    const products = res.paginatedProducts.data;
+    const pagination = res.paginatedProducts.pagination;
 
     res.render("shop/products-list", {
       products,
