@@ -170,10 +170,26 @@ const postDeleteCartItem = asyncHandler(async (req, res, next) => {
 });
 
 const getCheckout = asyncHandler(async (req, res, next) => {
-  res.render("shop/checkout", {
-    pageTitle: "Shop|Checkout",
-    path: "/checkout",
-  });
+  try {
+    const cart = await req.user.getCart();
+    const products = await cart.getProducts();
+
+    let cartTotal = 0;
+
+    await products.forEach((product) => {
+      let currentTotal = product.dataValues.cartItem.quantity * product.price;
+      cartTotal += currentTotal;
+    });
+    res.render("shop/checkout", {
+      pageTitle: "Shop|Checkout",
+      path: "/checkout",
+      cartItems: products,
+      cartTotal,
+      csrfToken: req.session.csrfToken,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 const getInvoice = asyncHandler(async (req, res, next) => {

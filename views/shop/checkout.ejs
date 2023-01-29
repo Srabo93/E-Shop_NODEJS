@@ -1,0 +1,57 @@
+<%- include('../includes/head.ejs') %>
+
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main class="row text-center list-group w-auto my-2">
+                <% if (cartItems.length> 0 ) { %>
+                    <% for (let item of cartItems) { %>
+                        <div class=" col-md-6 offset-md-3 my-2">
+                            <a href="/products/<%= item.id %>" class="list-group-item list-group-item-action  py-3">
+                                <div class="row w-100 text-center ">
+                                    <div class="col-4 mw-50">
+                                        <img src="/<%= item.image %>" class=" flex-shrink-0 img-fluid">
+                                        <h6 class="mb-0">
+                                            <%= item.title %>
+                                        </h6>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="mb-0 opacity-75">
+                                            <%= item.description %>
+                                        </p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="text-nowrap">Quantity:
+                                            <strong>
+                                                <%= item.cartItem.quantity %>
+                                            </strong>
+                                        </p>
+                                        <p class="text-nowrap">Price:
+                                            <strong>$<%= item.price %></strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <% } %>
+                            <div class=" col-md-6 offset-md-3 my-2">
+                                <div class="d-flex gap-2 w-100 justify-content-end align-items-baseline">
+                                    <h6 class="mb-0 h3">Total:</h6>
+                                    <p class="mb-0 opacity-75 h3">$<%= cartTotal %>
+                                    </p>
+                                </div>
+                                <!-- <div class="d-flex">
+                                    <form action="/create-order" method="post">
+                                        <button type="submit" class="btn btn-sm btn-primary">Order Now!</button>
+                                        <%- include('../includes/csrfToken.ejs') %>
+                                    </form>
+                                </div> -->
+                            </div>
+                            <% } else { %>
+                                <div class=" col-md-6 offset-md-3">
+                                    <h3>No Items</h3>
+                                </div>
+                                <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>
