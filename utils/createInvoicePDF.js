@@ -9,6 +9,7 @@ function createInvoice(invoice, path, res) {
   generateCustomerInformation(doc, invoice);
   generateTableHeader(doc);
   generateInvoiceTable(doc, invoice);
+  generateTotalStats(doc, invoice);
   generateFooter(doc);
 
   doc.pipe(fs.createWriteStream(path));
@@ -45,7 +46,7 @@ function generateTableHeader(doc) {
     .text("Description", 150, 320)
     .text("Quantity", 280, 320, { width: 90, align: "right" })
     .text("Amount", 370, 320, { width: 90, align: "right" })
-    .text("Total", 400, 320, { align: "right" });
+    .text("Subtotal", 400, 320, { align: "right" });
 }
 function generateTableRow(doc, y, c1, c2, c3, c4, c5) {
   doc
@@ -95,6 +96,14 @@ function generateCustomerInformation(doc, invoice) {
     .text(`Shipping.state`, 450, 230)
     .text(`Shipping.country`, 450, 245)
     .moveDown();
+}
+
+function generateTotalStats(doc, invoice) {
+  doc
+    .fontSize(12)
+    .text("inc. VAT", 370, 420, { width: 90, align: "right", underline: true })
+    .fontSize(15)
+    .text("Total", 370, 450, { width: 90, align: "right", bold: true });
 }
 module.exports = {
   createInvoice,
