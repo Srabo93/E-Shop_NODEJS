@@ -7,6 +7,7 @@ function createInvoice(invoice, path, res) {
   doc.pipe(res);
   generateHeader(doc);
   generateCustomerInformation(doc, invoice);
+  generateTableHeader(doc);
   generateInvoiceTable(doc, invoice);
   generateFooter(doc);
 
@@ -15,9 +16,9 @@ function createInvoice(invoice, path, res) {
 }
 
 function generateHeader(doc) {
-  //   const image = filePath.join("/", "public", "img", "shopping-cart.png");
-  // .image(image, 50, 45, { width: 50 })
+  const image = filePath.join("public", "img", "shopping-cart.png");
   doc
+    .image(image, 50, 45, { width: 50 })
     .fillColor("#444444")
     .fontSize(20)
     .text("E-Shop Express", 110, 57)
@@ -37,12 +38,22 @@ function generateFooter(doc) {
       { align: "center", width: 500 }
     );
 }
+function generateTableHeader(doc) {
+  doc
+    .fontSize(12)
+    .text("Products", 50, 320)
+    .text("Description", 150, 320)
+    .text("Quantity", 280, 320, { width: 90, align: "right" })
+    .text("Amount", 370, 320, { width: 90, align: "right" })
+    .text("Total", 400, 320, { align: "right" });
+}
 function generateTableRow(doc, y, c1, c2, c3, c4, c5) {
   doc
     .fontSize(10)
     .text(c1, 50, y)
     .text(c2, 150, y)
     .text(c3, 280, y, { width: 90, align: "right" })
+    .text(c4, 370, y, { width: 90, align: "right" })
     .text(c4, 370, y, { width: 90, align: "right" })
     .text(c5, 0, y, { align: "right" });
 }
@@ -61,8 +72,8 @@ function generateInvoiceTable(doc, invoice) {
       doc,
       position,
       item.title,
-      item.description.substring(0, 40) + "...",
-      item.orderItem.dataValues.quantity + "X",
+      item.description.substring(0, 30) + "...",
+      item.orderItem.dataValues.quantity,
       item.price + "$",
       item.orderItem.dataValues.quantity * item.price + "$"
     );
@@ -79,9 +90,10 @@ function generateCustomerInformation(doc, invoice) {
       215
     )
 
-    .text("John Doe", 300, 200)
-    .text("shipping.address", 300, 215)
-    .text(`shipping.city, shipping.state, shipping.country`, 300, 130)
+    .text("John Doe", 450, 200)
+    .text(`Shipping.city`, 450, 215)
+    .text(`Shipping.state`, 450, 230)
+    .text(`Shipping.country`, 450, 245)
     .moveDown();
 }
 module.exports = {

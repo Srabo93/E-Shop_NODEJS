@@ -77,7 +77,8 @@ app.use((error, req, res, next) => {
 app.listen(process.env.PORT, () => console.log("app is listening"));
 
 /**
- * TODO: DB Adjustments, User more data , Orders = userCentric OrderNr.
+ * TODO: DB Adjustments, User more data , Orders = userCentric OrderNr & OrderTotal, Products = Categories
+ * TODO Add Sorting by Price, created At
  * TODO Adjust Order Views
  * TODO Adjust PDF
  */
