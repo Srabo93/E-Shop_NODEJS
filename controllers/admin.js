@@ -4,15 +4,16 @@ const { deleteFile } = require("../utils/fileHelper");
 
 const getProducts = asyncHandler(async (req, res, next) => {
   try {
-    const products = await req.user.getProducts();
-    const hasProducts = await req.user.countProducts();
+    const products = res.paginatedProducts.data;
+    const pagination = res.paginatedProducts.pagination;
 
     res.render("admin/products-list", {
       products,
-      hasProducts,
+      hasProducts: products.length > 0,
       pageTitle: "Products List",
       path: "/admin/products-list",
       csrfToken: req.session.csrfToken,
+      pagination,
     });
   } catch (error) {
     next(error);

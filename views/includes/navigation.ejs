@@ -13,46 +13,45 @@
                     <a class="nav-link <%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <%= path === '/product-list' ? 'active' : '' %>" href="/products">Products</a>
+                    <a class="nav-link <%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
                 </li>
                 <% if(isAuthenticated) { %>
-                    <li class="nav-item">
-                        <a class="nav-link <%= path === '/cart' ? 'active' : '' %>" href="/cart">My Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/orders">My Orders</a>
-                    </li>
-                    <% } %>
-                        <% if (!isAuthenticated) { %>
-                            <li class="nav-item">
-                                <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/signup">Sign Up</a>
-                            </li>
-                            <% } %>
-                                <% if(isAuthenticated) { %>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/logout">Logout</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle " href="#" role="button"
-                                            data-bs-toggle="dropdown">Admin
-                                        </a>
-                                        <ul class="dropdown-menu bg-light p-2">
-                                            <li class="nav-item">
-                                                <a class="nav-link <%= path === '/admin/add-product' ? 'active' : '' %>"
-                                                    href="/admin/add-product">Add
-                                                    Product</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link <%= path === '/admin/products-list' ? 'active' : '' %>"
-                                                    href="/admin/products-list">Products List
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <% } %>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === '/cart' ? 'active' : '' %>" href="/cart">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === '/orders' ? 'active' : '' %>" href="/orders">My Orders</a>
+                </li>
+                <% } %>
+                <% if (!isAuthenticated) { %>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/signup">Sign Up</a>
+                </li>
+                <% } %>
+                <% if(isAuthenticated) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown">Admin
+                    </a>
+                    <ul class="dropdown-menu bg-light p-2">
+                        <li class="nav-item">
+                            <a class="nav-link <%= path === '/admin/add-product' ? 'active' : '' %>"
+                                href="/admin/add-product">Add
+                                Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= path === '/admin/products-list' ? 'active' : '' %>"
+                                href="/admin/products-list">Products List
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <% } %>
             </ul>
         </div>
     </nav>

@@ -26,6 +26,17 @@ const createPagination = async (data) => {
     };
   }
 
+  if (pagesTotal === 1) {
+    pagination.prev = {
+      page: 0,
+      limit,
+    };
+    pagination.next = {
+      page: 0,
+      limit,
+    };
+  }
+
   return pagination;
 };
 

@@ -7,6 +7,7 @@
 
 
     <main class="container my-3">
+        <%- include('../includes/sort-bar.ejs') %>
         <% if (hasProducts) { %>
         <table class="table table-striped table-hover table align-middle">
             <thead>
@@ -46,6 +47,7 @@
                 <% }) %>
             </tbody>
         </table>
+        <%- include('../includes/pagination.ejs', {pageRoute: '/admin/products-list'}) %>
         <% } else { %>
         <h1>No Products Found!</h1>
         <% } %>

@@ -1,7 +1,7 @@
 const express = require("express");
 const { isAuthenticated } = require("../middlewares/auth");
+const { paginatedAdminProducts } = require("../middlewares/pagination");
 const { productRules, validate } = require("../middlewares/validations");
-const router = express.Router();
 const {
   getAddProduct,
   postAddProduct,
@@ -10,6 +10,7 @@ const {
   postEditProduct,
   deleteProduct,
 } = require("../controllers/admin");
+const router = express.Router();
 
 router
   .route("/add-product")
@@ -20,6 +21,8 @@ router
   .route("/edit-product")
   .post(isAuthenticated, productRules, validate, postEditProduct);
 router.route("/delete-product").post(isAuthenticated, deleteProduct);
-router.route("/products-list").get(isAuthenticated, getProducts);
+router
+  .route("/products-list")
+  .get(isAuthenticated, paginatedAdminProducts(), getProducts);
 
 module.exports = router;

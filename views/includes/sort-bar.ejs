@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Sort By</li>
+        <li class="breadcrumb-item">
+            Latest
+            <a class="px-1" href="<%= path %>?sort=createdAt,asc">
+                <i class="fa-solid fa-arrow-up"></i></a>
+            <a class="px-1" href="<%= path %>?sort=createdAt,desc">
+                <i class="fa-sharp fa-solid fa-arrow-down"></i></a>
+        </li>
+        <li class="breadcrumb-item">Price
+            <a class="px-1 active" href="<%= path %>?sort=price,asc">
+                <i class="fa-solid fa-arrow-up"></i></a>
+            <a class="px-1" href="<%= path %>?sort=price,desc">
+                <i class="fa-sharp fa-solid fa-arrow-down"></i></a>
+        </li>
+    </ol>
+</nav>

@@ -76,7 +76,7 @@ const getProducts = asyncHandler(async (req, res, next) => {
     res.render("shop/products-list", {
       products,
       pageTitle: "Shop|Products",
-      path: "/product-list",
+      path: "/products",
       pagination,
       hasProducts: products.length > 0,
       csrfToken: req.session.csrfToken,

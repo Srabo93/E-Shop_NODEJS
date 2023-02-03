@@ -1,47 +1,47 @@
 <%- include('../includes/head.ejs') %>
 
-    </head>
+</head>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-            <main class="container my-4">
-                <% if (orders.length> 0) { %>
-                    <div class="list-group">
-                        <% orders.forEach((order,i)=> { %>
-                            <a href="/orders/<%=order.id %>"
-                                class=" d-flex list-group-item list-group-item-action mb-5 shadow-sm">
-                                <div class="d-flex flex-column ">
-                                    <h5 class="mb-1">Order Nr. <%= order.id %>
-                                    </h5>
-                                    <p>Total: $<%= order.dataValues.orderTotal %>
-                                    </p>
-                                    <small>
-                                        Ordered at: <%= order.createdAt.toLocaleDateString('en-US') %>
-                                    </small>
-                                </div>
-                                <div class="mx-5">
-                                    <% order.products.forEach(product=> { %>
-                                        <div>
-                                            <p class="mb-1">
-                                                <%= product.title %> (Quantity: <%= product.orderItem.quantity %> )
-                                            </p>
-                                            <p class="mb-1">
-                                                $<%= product.price %>
-                                            </p>
-                                            <small>
-                                                <%= product.description %>
-                                            </small>
-                                        </div>
-                                        <hr />
-                                        <% }) %>
-                                </div>
-                            </a>
-                            <% }) %>
-                                <%- include('../includes/pagination.ejs',{pageRoute: '/orders' }) %>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="container my-4">
+        <%- include('../includes/sort-bar.ejs') %>
+        <% if (orders.length> 0) { %>
+        <div class="list-group">
+            <% orders.forEach((order,i)=> { %>
+            <a href="/orders/<%=order.id %>" class=" d-flex list-group-item list-group-item-action mb-5 shadow-sm">
+                <div class="d-flex flex-column ">
+                    <h5 class="mb-1">Order Nr. <%= order.id %>
+                    </h5>
+                    <p>Total: $<%= order.dataValues.orderTotal %>
+                    </p>
+                    <small>
+                        Ordered at: <%= order.createdAt.toLocaleDateString('en-US') %>
+                    </small>
+                </div>
+                <div class="mx-5">
+                    <% order.products.forEach(product=> { %>
+                    <div>
+                        <p class="mb-1">
+                            <%= product.title %> (Quantity: <%= product.orderItem.quantity %> )
+                        </p>
+                        <p class="mb-1">
+                            $<%= product.price %>
+                        </p>
+                        <small>
+                            <%= product.description %>
+                        </small>
                     </div>
-                    <% } else { %>
-                        <h1>NOTHING HERE</h1>
-                        <% } %>
-            </main>
+                    <hr />
+                    <% }) %>
+                </div>
+            </a>
+            <% }) %>
+            <%- include('../includes/pagination.ejs',{pageRoute: '/orders' }) %>
+        </div>
+        <% } else { %>
+        <h1>NOTHING HERE</h1>
+        <% } %>
+    </main>
 
-            <%- include('../includes/end.ejs') %>
+    <%- include('../includes/end.ejs') %>
