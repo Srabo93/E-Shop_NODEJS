@@ -20,6 +20,16 @@
                     value="<%= invalidInput.email %>" placeholder="name@example.com">
             </div>
             <div class="mb-3">
+                <input type="firstName" name="firstName" id="firstName"
+                    class="form-control <%= invalidInput.firstName !== '' ? 'is-invalid' : '' %>"
+                    value="<%= invalidInput.firstName %>" placeholder="enter first name">
+            </div>
+            <div class="mb-3">
+                <input type="lastName" name="lastName" id="lastName"
+                    class="form-control <%= invalidInput.lastName !== '' ? 'is-invalid' : '' %>"
+                    value="<%= invalidInput.lastName %>" placeholder="enter last name">
+            </div>
+            <div class="mb-3">
                 <input type="password" name="password" id="password"
                     class="form-control <%= invalidInput.password !== '' ? 'is-invalid' : '' %>"
                     placeholder="enter password">

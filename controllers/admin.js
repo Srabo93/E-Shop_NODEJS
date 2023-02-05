@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const Product_Category = require("../models/Product_Category");
 const asyncHandler = require("express-async-handler");
 const { deleteFile } = require("../utils/fileHelper");
 
@@ -32,14 +33,18 @@ const getAddProduct = asyncHandler(async (req, res, next) => {
 });
 
 const postAddProduct = asyncHandler(async (req, res, next) => {
-  const { title, description, price } = req.body;
+  const { title, description, price, categoryOptions } = req.body;
 
   try {
+    const category = await Product_Category.findOne({
+      where: { title: categoryOptions },
+    });
     await req.user.createProduct({
       title,
       price,
       image: req.file.path,
       description,
+      productCategoryId: category.id,
     });
     res.redirect("/admin/products-list");
   } catch (error) {
