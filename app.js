@@ -25,7 +25,11 @@ const Cart = require("./models/Cart");
 const CartItem = require("./models/CartItem");
 const Order = require("./models/Order");
 const OrderItem = require("./models/OrderItem");
+const Payment_Details = require("./models/Payment_Details");
+const Product_Category = require("./models/Product_Category");
 
+Product_Category.hasMany(Product);
+Product.belongsTo(Product_Category);
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
 User.hasOne(Cart);
@@ -35,6 +39,8 @@ Product.belongsToMany(Cart, { through: CartItem });
 Order.belongsTo(User);
 User.hasMany(Order);
 Order.belongsToMany(Product, { through: OrderItem });
+Order.hasOne(Payment_Details);
+Payment_Details.belongsTo(Order);
 
 sequelize
   .authenticate()
@@ -50,9 +56,6 @@ app.use("/data/images", express.static(path.join(__dirname, "/data/images")));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
-);
-app.use(
   session({
     secret: process.env.SESSION_SECRET,
     store: new SequelizeStore({
@@ -63,6 +66,9 @@ app.use(
   })
 );
 app.use(authenticationHandler);
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
+);
 app.use(csurfTokenHandler);
 
 app.use(shopRoutes);
@@ -75,8 +81,3 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => console.log("app is listening"));
-
-/**
- * TODO: DB Adjustments, User more data , Orders = userCentric OrderNr & OrderTotal, Products = Categories
- * TODO Add Frontend Async Functionalities
- */

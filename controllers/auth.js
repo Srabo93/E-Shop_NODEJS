@@ -47,6 +47,8 @@ const getSignUp = asyncHandler(async (req, res, next) => {
     errors: false,
     invalidInput: {
       email: "",
+      firstName: "",
+      lastName: "",
       password: "",
       repeatedPassword: "",
     },
@@ -54,7 +56,7 @@ const getSignUp = asyncHandler(async (req, res, next) => {
 });
 
 const postSignUp = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, firstName, lastName } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
 
@@ -62,6 +64,8 @@ const postSignUp = asyncHandler(async (req, res, next) => {
       let hashedPassword = await bcrypt.hash(password, 12);
       const newUser = await User.create({
         email,
+        firstName,
+        lastName,
         password: hashedPassword,
       });
 

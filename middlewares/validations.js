@@ -14,6 +14,14 @@ const userSignUpRules = [
         }
       });
     }),
+  body("firstName")
+    .trim()
+    .isLength({ min: 2 })
+    .withMessage("First Name must be at least 2 characters"),
+  body("lastName")
+    .trim()
+    .isLength({ min: 2 })
+    .withMessage("Last Name must be at least 2 characters"),
   body(
     "password",
     "Password must be in range of 5 to 18 characters and must contain at least one digit"
@@ -64,6 +72,7 @@ const productRules = [
     .trim()
     .isLength({ min: 1, max: 400 })
     .withMessage("Description must be min Lenght 1 and Max Length 400"),
+  body("categoryOptions").isLength({ min: 1 }).withMessage("Category required"),
 ];
 
 const validate = (req, res, next) => {
@@ -81,6 +90,8 @@ const validate = (req, res, next) => {
         errors: errors.array()[0].msg,
         invalidInput: {
           email: req.body.email,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
           password: req.body.password,
           repeatedPassword: req.body.repeatedPassword,
         },
