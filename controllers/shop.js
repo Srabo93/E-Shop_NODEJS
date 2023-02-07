@@ -107,11 +107,13 @@ const getCart = asyncHandler(async (req, res, next) => {
     const products = await cart.getProducts();
 
     let cartTotal = 0;
-
     await products.forEach((product) => {
       let currentTotal = product.dataValues.cartItem.quantity * product.price;
       cartTotal += currentTotal;
     });
+
+    cart.set({ total: cartTotal });
+    await cart.save();
 
     res.render("shop/cart", {
       pageTitle: "Shop|Cart",
@@ -125,12 +127,11 @@ const getCart = asyncHandler(async (req, res, next) => {
   }
 });
 
-const postCart = asyncHandler(async (req, res, next) => {
+const postCartItem = asyncHandler(async (req, res, next) => {
   const { productId } = req.body;
   try {
     let cart = await req.user.getCart();
     let cartProducts = await cart.getProducts({ where: { id: productId } });
-
     let product;
     let newQuantity = 1;
 
@@ -174,12 +175,8 @@ const getCheckout = asyncHandler(async (req, res, next) => {
     const cart = await req.user.getCart();
     const products = await cart.getProducts();
 
-    let cartTotal = 0;
+    let cartTotal = cart.dataValues.total;
 
-    await products.forEach((product) => {
-      let currentTotal = product.dataValues.cartItem.quantity * product.price;
-      cartTotal += currentTotal;
-    });
     res.render("shop/checkout", {
       pageTitle: "Shop|Checkout",
       path: "/checkout",
@@ -221,7 +218,7 @@ module.exports = {
   getCheckout,
   getOrders,
   getProduct,
-  postCart,
+  postCart: postCartItem,
   postDeleteCartItem,
   postOrder,
   getInvoice,

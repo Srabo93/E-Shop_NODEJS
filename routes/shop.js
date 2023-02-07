@@ -13,7 +13,7 @@ const {
   getCheckout,
   getOrders,
   getProduct,
-  postCart,
+  postCart: postCartItem,
   postDeleteCartItem,
   postOrder,
   getInvoice,
@@ -25,7 +25,7 @@ router.route("/products/:productId").get(getProduct);
 router
   .route("/cart")
   .get(isAuthenticated, getCart)
-  .post(isAuthenticated, postCart);
+  .post(isAuthenticated, postCartItem);
 router.route("/cart-delete-item").post(isAuthenticated, postDeleteCartItem);
 router.route("/checkout").get(isAuthenticated, getCheckout);
 router.route("/orders").get(isAuthenticated, paginatedUserOrders(), getOrders);
