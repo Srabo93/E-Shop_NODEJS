@@ -1,5 +1,4 @@
 const Product = require("../models/Product");
-const Product_Category = require("../models/Product_Category");
 const asyncHandler = require("express-async-handler");
 const { deleteFile } = require("../utils/fileHelper");
 
@@ -36,15 +35,12 @@ const postAddProduct = asyncHandler(async (req, res, next) => {
   const { title, description, price, categoryOptions } = req.body;
 
   try {
-    const category = await Product_Category.findOne({
-      where: { title: categoryOptions },
-    });
     await req.user.createProduct({
       title,
       price,
       image: req.file.path,
       description,
-      productCategoryId: category.id,
+      productCategoryId: categoryOptions,
     });
     res.redirect("/admin/products-list");
   } catch (error) {
@@ -76,7 +72,8 @@ const getEditProduct = asyncHandler(async (req, res, next) => {
 });
 
 const postEditProduct = asyncHandler(async (req, res, next) => {
-  const { productId, title, description, price } = req.body;
+  const { productId, title, description, price, categoryOptions } = req.body;
+
   try {
     const product = await Product.findByPk(productId);
 
@@ -87,6 +84,10 @@ const postEditProduct = asyncHandler(async (req, res, next) => {
     product.title = title ? title : product.title;
     product.description = description ? description : product.description;
     product.price = price ? price : product.price;
+    product.productCategoryId = categoryOptions
+      ? categoryOptions
+      : product.categoryOptions;
+
     if (req.file) {
       deleteFile(product.image);
       product.image = req.file.path;

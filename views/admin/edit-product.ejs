@@ -24,22 +24,22 @@
                 <div class="form-control my-2">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="categoryOptions" id="laptops"
-                            value="<%= editing ||'laptops' %>" required>
+                            <%=product.productCategoryId === 3 ? "disabled" : "" %> value=3 required>
                         <label class="form-check-label" for="laptops">Laptops</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="categoryOptions" id="smartphones"
-                            value="<%= editing ||'smartphones' %>">
+                            <%=product.productCategoryId === 2 ? "disabled" : "" %> value=2>
                         <label class="form-check-label" for="smartphones">Smartphones</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="categoryOptions" id="homeDeco"
-                            value="<%= editing ||'homeDeco' %>">
+                            <%=product.productCategoryId === 4 ? "disabled" : "" %> value=4>
                         <label class="form-check-label" for="homeDeco">Home-Deco</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="categoryOptions" id="fragrances"
-                            value="<%= editing ||'fragrances' %>">
+                            <%=product.productCategoryId === 1 ? "disabled" :"" %> value=1>
                         <label class="form-check-label" for="fragrances">Fragrances</label>
                     </div>
                 </div>
