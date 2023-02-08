@@ -25,17 +25,6 @@ const getOrders = asyncHandler(async (req, res, next) => {
     const orders = res.paginatedUserOrders.data;
     const pagination = res.paginatedUserOrders.pagination;
 
-    await orders.forEach((order) => {
-      order.dataValues.orderTotal = 0;
-      order.products.forEach((product) => {
-        let currentTotal = Number(
-          product.dataValues.orderItem.quantity * product.price
-        );
-        order.dataValues.orderTotal =
-          order.dataValues.orderTotal + currentTotal;
-      });
-    });
-
     res.render("shop/orders", {
       path: "/orders",
       pageTitle: "Shop|My Orders",
@@ -60,7 +49,8 @@ const postOrder = asyncHandler(async (req, res, next) => {
         return product;
       })
     );
-
+    order.set({ total: cart.total });
+    await order.save();
     await cart.setProducts(null);
     res.redirect("/orders");
   } catch (error) {
@@ -112,14 +102,14 @@ const getCart = asyncHandler(async (req, res, next) => {
       cartTotal += currentTotal;
     });
 
-    cart.set({ total: cartTotal });
+    cart.set({ total: cartTotal.toFixed(2) });
     await cart.save();
 
     res.render("shop/cart", {
       pageTitle: "Shop|Cart",
       path: "/cart",
       cartItems: products,
-      cartTotal,
+      cartTotal: cart.total,
       csrfToken: req.session.csrfToken,
     });
   } catch (error) {

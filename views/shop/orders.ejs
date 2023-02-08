@@ -13,7 +13,7 @@
                 <div class="d-flex flex-column ">
                     <h5 class="mb-1">Order Nr. <%= order.id %>
                     </h5>
-                    <p>Total: $<%= order.dataValues.orderTotal %>
+                    <p>Total: $<%= order.dataValues.total %>
                     </p>
                     <small>
                         Ordered at: <%= order.createdAt.toLocaleDateString('en-US') %>
