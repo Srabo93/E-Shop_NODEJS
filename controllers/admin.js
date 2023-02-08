@@ -110,7 +110,7 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
     });
 
     deleteFile(product.image);
-    await req.user.removeProduct(productId);
+    await Product.destroy({ where: { id: productId } });
 
     res.redirect("/admin/products-list");
   } catch (error) {

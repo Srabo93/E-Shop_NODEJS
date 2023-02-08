@@ -81,4 +81,3 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => console.log("app is listening"));
-// TODO Adjust Logic in Controller for Orders responsible, then add Stripe
