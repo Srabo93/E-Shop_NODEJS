@@ -9,7 +9,7 @@ const Cart = sequelize.define("cart", {
     allowNull: false,
   },
   total: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
   },
 });
 
