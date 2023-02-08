@@ -99,11 +99,23 @@ function generateCustomerInformation(doc, invoice) {
 }
 
 function generateTotalStats(doc, invoice) {
+  const [order] = invoice;
+  let VAT = (order.dataValues.total / 100) * 19;
   doc
     .fontSize(12)
-    .text("inc. VAT", 370, 420, { width: 90, align: "right", underline: true })
+    .text("inc. VAT", 370, 420, {
+      width: 90,
+      align: "right",
+      underline: true,
+    })
+    .text(`${VAT.toFixed(2)}$`, 530, 420)
     .fontSize(15)
-    .text("Total", 370, 450, { width: 90, align: "right", bold: true });
+    .text("Total", 370, 450, {
+      width: 90,
+      align: "right",
+      bold: true,
+    })
+    .text(`${order.dataValues.total}$`, 520, 450);
 }
 module.exports = {
   createInvoice,
