@@ -27,7 +27,8 @@
     "mysql2": "^2.3.3",
     "nodemailer": "^6.8.0",
     "pdfkit": "^0.13.0",
-    "sequelize": "^6.28.0"
+    "sequelize": "^6.28.0",
+    "stripe": "^11.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
