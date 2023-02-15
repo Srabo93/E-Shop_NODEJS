@@ -17,6 +17,7 @@ const {
   postDeleteCartItem,
   postOrder,
   getInvoice,
+  createPaymentIntent,
 } = require("../controllers/shop");
 
 router.route("/").get(paginatedProducts(Product), getIndex);
@@ -31,5 +32,8 @@ router.route("/checkout").get(isAuthenticated, getCheckout);
 router.route("/orders").get(isAuthenticated, paginatedUserOrders(), getOrders);
 router.route("/orders/:orderId").get(isAuthenticated, getInvoice);
 router.route("/create-order").post(isAuthenticated, postOrder);
+router
+  .route("/create-payment-intent")
+  .post(isAuthenticated, createPaymentIntent);
 
 module.exports = router;

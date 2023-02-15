@@ -47,11 +47,7 @@
                 </p>
             </div>
             <div class="d-flex">
-                <form action="/create-order" method="post">
-                    <button type="submit" class="btn btn-sm btn-primary">Order Now!</button>
-                    <%- include('../includes/csrfToken.ejs') %>
-                </form>
-                <!-- <a href="/checkout" class="btn btn-sm btn-primary">Order Now!</a> -->
+                <a href="/checkout" class="btn btn-sm btn-primary">Order Now!</a>
             </div>
         </div>
         <% } else { %>

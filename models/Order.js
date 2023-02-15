@@ -9,7 +9,7 @@ const Order = sequelize.define("order", {
     allowNull: false,
   },
   total: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.DECIMAL(10, 2),
   },
 });
 

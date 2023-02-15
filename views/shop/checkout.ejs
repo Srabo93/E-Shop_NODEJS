@@ -1,57 +1,74 @@
 <%- include('../includes/head.ejs') %>
+<meta charset="utf-8" />
+<title>Accept a payment</title>
+<meta name="description" content="A demo of a payment on Stripe" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- <link rel="stylesheet" href="/css/checkout.css" /> -->
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/js/checkout.js" defer></script>
+</head>
 
-    </head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="row text-center list-group w-auto my-2">
+        <% if (cartItems.length> 0 ) { %>
+        <% for (let item of cartItems) { %>
+        <div class=" col-md-6 offset-md-3 my-2">
+            <a href="/products/<%= item.id %>" class="list-group-item list-group-item-action  py-3">
+                <div class="row w-100 text-center ">
+                    <div class="col-4 mw-50">
+                        <img src="/<%= item.image %>" class=" flex-shrink-0 img-fluid">
+                        <h6 class="mb-0">
+                            <%= item.title %>
+                        </h6>
+                    </div>
+                    <div class="col-4">
+                        <p class="mb-0 opacity-75">
+                            <%= item.description %>
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-nowrap">Quantity:
+                            <strong>
+                                <%= item.cartItem.quantity %>
+                            </strong>
+                        </p>
+                        <p class="text-nowrap">Price:
+                            <strong>$<%= item.price %></strong>
+                        </p>
+                    </div>
+                </div>
+            </a>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-            <main class="row text-center list-group w-auto my-2">
-                <% if (cartItems.length> 0 ) { %>
-                    <% for (let item of cartItems) { %>
-                        <div class=" col-md-6 offset-md-3 my-2">
-                            <a href="/products/<%= item.id %>" class="list-group-item list-group-item-action  py-3">
-                                <div class="row w-100 text-center ">
-                                    <div class="col-4 mw-50">
-                                        <img src="/<%= item.image %>" class=" flex-shrink-0 img-fluid">
-                                        <h6 class="mb-0">
-                                            <%= item.title %>
-                                        </h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="mb-0 opacity-75">
-                                            <%= item.description %>
-                                        </p>
-                                    </div>
-                                    <div class="col-4">
-                                        <p class="text-nowrap">Quantity:
-                                            <strong>
-                                                <%= item.cartItem.quantity %>
-                                            </strong>
-                                        </p>
-                                        <p class="text-nowrap">Price:
-                                            <strong>$<%= item.price %></strong>
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <% } %>
-                            <div class=" col-md-6 offset-md-3 my-2">
-                                <div class="d-flex gap-2 w-100 justify-content-end align-items-baseline">
-                                    <h6 class="mb-0 h3">Total:</h6>
-                                    <p class="mb-0 opacity-75 h3">$<%= cartTotal %>
-                                    </p>
-                                </div>
-                                <!-- <div class="d-flex">
-                                    <form action="/create-order" method="post">
-                                        <button type="submit" class="btn btn-sm btn-primary">Order Now!</button>
-                                        <%- include('../includes/csrfToken.ejs') %>
-                                    </form>
-                                </div> -->
-                            </div>
-                            <% } else { %>
-                                <div class=" col-md-6 offset-md-3">
-                                    <h3>No Items</h3>
-                                </div>
-                                <% } %>
-            </main>
-            <%- include('../includes/end.ejs') %>
+        </div>
+        <% } %>
+        <div class=" col-md-6 offset-md-3 my-2">
+            <div class="d-flex gap-2 w-100 justify-content-end align-items-baseline">
+                <h6 class="mb-0 h3">Total:</h6>
+                <p class="mb-0 opacity-75 h3">$<%= cartTotal %>
+                </p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mw-50 mt-4">
+            <form id="payment-form">
+                <div id="link-authentication-element">
+                    <!--Stripe.js injects the Link Authentication Element-->
+                </div>
+                <div id="payment-element">
+                    <!--Stripe.js injects the Payment Element-->
+                </div>
+                <%- include('../includes/csrfToken.ejs') %>
+                <button id="submit" class="btn btn-primary mt-2">
+                    <div class="spinner hidden" id="spinner"></div>
+                    <span id="button-text">Pay now</span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+            </form>
+        </div>
+        <% } else { %>
+        <div class=" col-md-6 offset-md-3">
+            <h3>No Items</h3>
+        </div>
+        <% } %>
+    </main>
+    <%- include('../includes/end.ejs') %>

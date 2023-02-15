@@ -2,6 +2,9 @@ const Product = require("../models/Product");
 const asyncHandler = require("express-async-handler");
 const path = require("path");
 const { createInvoice } = require("../utils/createInvoicePDF");
+const stripe = require("stripe")(
+  "sk_test_51MYvKtHCqjOGMP8pOUnScg7wbpcxlJ7RIEmbcRLeukIMe1bRQC89SUeJoPbujlXJYQJlbJHZsTCuC07ZAajcGvgH00P6cWz8xU"
+);
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
@@ -122,6 +125,9 @@ const postCartItem = asyncHandler(async (req, res, next) => {
   try {
     let cart = await req.user.getCart();
     let cartProducts = await cart.getProducts({ where: { id: productId } });
+    if (!cart) {
+      await req.user.createCart();
+    }
     let product;
     let newQuantity = 1;
 
@@ -179,6 +185,28 @@ const getCheckout = asyncHandler(async (req, res, next) => {
   }
 });
 
+const createPaymentIntent = asyncHandler(async (req, res, next) => {
+  try {
+    const cart = await req.user.getCart();
+
+    let cartTotal = cart.dataValues.total * 100;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: cartTotal,
+      currency: "usd",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 const getInvoice = asyncHandler(async (req, res, next) => {
   const { orderId } = req.params;
   const invoiceName = `invoice-${orderId}.pdf`;
@@ -212,4 +240,5 @@ module.exports = {
   postDeleteCartItem,
   postOrder,
   getInvoice,
+  createPaymentIntent,
 };

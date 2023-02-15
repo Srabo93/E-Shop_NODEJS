@@ -69,8 +69,6 @@ const postSignUp = asyncHandler(async (req, res, next) => {
         password: hashedPassword,
       });
 
-      newUser.createCart({ userId: newUser.id });
-
       let options = {
         email,
         subject: "Sign Up Successfully",
