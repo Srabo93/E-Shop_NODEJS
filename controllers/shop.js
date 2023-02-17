@@ -40,7 +40,7 @@ const getOrders = asyncHandler(async (req, res, next) => {
   }
 });
 
-const postOrder = asyncHandler(async (req, res, next) => {
+const getOrderCreated = asyncHandler(async (req, res, next) => {
   try {
     const cart = await req.user.getCart();
     const products = await cart.getProducts();
@@ -238,7 +238,7 @@ module.exports = {
   getProduct,
   postCart: postCartItem,
   postDeleteCartItem,
-  postOrder,
+  postOrder: getOrderCreated,
   getInvoice,
   createPaymentIntent,
 };
