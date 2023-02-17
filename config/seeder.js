@@ -13,7 +13,7 @@ let products = [
     id: 1,
     title: "iPhone 9",
     description: "An apple mobile which is nothing like apple",
-    price: 549,
+    price: 549.0,
     discountPercentage: 12.96,
     rating: 4.69,
     stock: 94,
@@ -33,7 +33,7 @@ let products = [
     title: "iPhone X",
     description:
       "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-    price: 899,
+    price: 899.0,
     discountPercentage: 17.94,
     rating: 4.44,
     stock: 34,
@@ -52,7 +52,7 @@ let products = [
     title: "Samsung Universe 9",
     description:
       "Samsung's new variant which goes beyond Galaxy to the Universe",
-    price: 1249,
+    price: 1249.0,
     discountPercentage: 15.46,
     rating: 4.09,
     stock: 36,
@@ -65,7 +65,7 @@ let products = [
     id: 4,
     title: "OPPOF19",
     description: "OPPO F19 is officially announced on April 2021.",
-    price: 280,
+    price: 280.0,
     discountPercentage: 17.91,
     rating: 4.3,
     stock: 123,
@@ -85,7 +85,7 @@ let products = [
     title: "Huawei P30",
     description:
       "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-    price: 499,
+    price: 499.0,
     discountPercentage: 10.58,
     rating: 4.09,
     stock: 32,
@@ -103,7 +103,7 @@ let products = [
     title: "MacBook Pro",
     description:
       "MacBook Pro 2021 with mini-LED display may launch between September, November",
-    price: 1749,
+    price: 1749.0,
     discountPercentage: 11.02,
     rating: 4.57,
     stock: 83,
@@ -122,7 +122,7 @@ let products = [
     title: "Samsung Galaxy Book",
     description:
       "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
-    price: 1499,
+    price: 1499.0,
     discountPercentage: 4.15,
     rating: 4.25,
     stock: 50,
@@ -141,7 +141,7 @@ let products = [
     title: "Microsoft Surface Laptop 4",
     description:
       "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
-    price: 1499,
+    price: 1499.0,
     discountPercentage: 10.23,
     rating: 4.43,
     stock: 68,
@@ -161,7 +161,7 @@ let products = [
     title: "Infinix INBOOK",
     description:
       "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
-    price: 1099,
+    price: 1099.0,
     discountPercentage: 11.83,
     rating: 4.54,
     stock: 96,
@@ -181,7 +181,7 @@ let products = [
     title: "HP Pavilion 15-DK1056WM",
     description:
       "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
-    price: 1099,
+    price: 1099.0,
     discountPercentage: 6.18,
     rating: 4.43,
     stock: 89,
@@ -200,7 +200,7 @@ let products = [
     title: "perfume Oil",
     description:
       "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
-    price: 13,
+    price: 13.0,
     discountPercentage: 8.4,
     rating: 4.26,
     stock: 65,
@@ -218,7 +218,7 @@ let products = [
     id: 12,
     title: "Brown Perfume",
     description: "Royal_Mirage Sport Brown Perfume for Men & Women - 120ml",
-    price: 40,
+    price: 40.0,
     discountPercentage: 15.66,
     rating: 4,
     stock: 52,
@@ -238,7 +238,7 @@ let products = [
     title: "Fog Scent Xpressio Perfume",
     description:
       "Product details of Best Fog Scent Xpressio Perfume 100ml For Men cool long lasting perfumes for Men",
-    price: 13,
+    price: 13.0,
     discountPercentage: 8.14,
     rating: 4.59,
     stock: 61,
@@ -258,7 +258,7 @@ let products = [
     title: "Non-Alcoholic Concentrated Perfume Oil",
     description:
       "Original Al Munakh® by Mahal Al Musk | Our Impression of Climate | 6ml Non-Alcoholic Concentrated Perfume Oil",
-    price: 120,
+    price: 120.0,
     discountPercentage: 15.6,
     rating: 4.21,
     stock: 114,
@@ -277,7 +277,7 @@ let products = [
     title: "Eau De Perfume Spray",
     description:
       "Genuine  Al-Rehab spray perfume from UAE/Saudi Arabia/Yemen High Quality",
-    price: 30,
+    price: 30.0,
     discountPercentage: 10.99,
     rating: 4.7,
     stock: 105,
@@ -297,7 +297,7 @@ let products = [
     title: "Plant Hanger For Home",
     description:
       "Boho Decor Plant Hanger For Home Wall Decoration Macrame Wall Hanging Shelf",
-    price: 41,
+    price: 41.0,
     discountPercentage: 17.86,
     rating: 4.08,
     stock: 131,
@@ -318,7 +318,7 @@ let products = [
     title: "Flying Wooden Bird",
     description:
       "Package Include 6 Birds with Adhesive Tape Shape: 3D Shaped Wooden Birds Material: Wooden MDF, Laminated 3.5mm",
-    price: 51,
+    price: 51.0,
     discountPercentage: 15.58,
     rating: 4.41,
     stock: 17,
@@ -338,7 +338,7 @@ let products = [
     title: "3D Embellishment Art Lamp",
     description:
       "3D led lamp sticker Wall sticker 3d wall art light on/off button  cell operated (included)",
-    price: 20,
+    price: 20.0,
     discountPercentage: 16.49,
     rating: 4.82,
     stock: 54,
@@ -358,7 +358,7 @@ let products = [
     title: "Handcraft Chinese style",
     description:
       "Handcraft Chinese style art luxury palace hotel villa mansion home decor ceramic vase with brass fruit plate",
-    price: 60,
+    price: 60.0,
     discountPercentage: 15.34,
     rating: 4.44,
     stock: 7,
@@ -394,6 +394,7 @@ User.create({
         description: product.description,
         price: product.price,
         image: product.thumbnail,
+        rating: product.rating,
         productCategoryId: product.category,
         userId: 1,
       });

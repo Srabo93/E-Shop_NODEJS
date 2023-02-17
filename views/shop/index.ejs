@@ -16,6 +16,7 @@
             <div class="col-md-5 ">
                 <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
                 <p class="lead"><strong>$<%= product.price %></strong></p>
+                <p class="fst-italic">Rating: <%= product.rating %> of 5</p>
                 <p class="lead"><%= product.description %></p>
                 <div class="d-flex justify-content-start align-content-center">
                     <a href="/products/<%= product.id %>" class="btn btn-warning">Details</a>
