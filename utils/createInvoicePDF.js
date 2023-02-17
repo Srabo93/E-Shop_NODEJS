@@ -103,19 +103,19 @@ function generateTotalStats(doc, invoice) {
   let VAT = (order.dataValues.total / 100) * 19;
   doc
     .fontSize(12)
-    .text("inc. VAT", 370, 420, {
+    .text("inc. VAT", 370, 450, {
       width: 90,
       align: "right",
       underline: true,
     })
-    .text(`${VAT.toFixed(2)}$`, 530, 420)
+    .text(`${VAT.toFixed(2)}$`, 510, 450)
     .fontSize(15)
-    .text("Total", 370, 450, {
+    .text("Total", 370, 500, {
       width: 90,
       align: "right",
       bold: true,
     })
-    .text(`${order.dataValues.total}$`, 520, 450);
+    .text(`${order.dataValues.total}$`, 490, 500);
 }
 module.exports = {
   createInvoice,
