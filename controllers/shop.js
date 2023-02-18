@@ -2,16 +2,23 @@ const Product = require("../models/Product");
 const asyncHandler = require("express-async-handler");
 const path = require("path");
 const { createInvoice } = require("../utils/createInvoicePDF");
+const { Op } = require("sequelize");
 const stripe = require("stripe")(
   "sk_test_51MYvKtHCqjOGMP8pOUnScg7wbpcxlJ7RIEmbcRLeukIMe1bRQC89SUeJoPbujlXJYQJlbJHZsTCuC07ZAajcGvgH00P6cWz8xU"
 );
 
 const getIndex = asyncHandler(async (req, res, next) => {
   try {
+    const topProducts = await Product.findAll({
+      where: { rating: { [Op.gt]: 4 } },
+      limit: 9,
+    });
+
     const products = res.paginatedProducts.data;
     const pagination = res.paginatedProducts.pagination;
     res.render("shop/index", {
       products,
+      topProducts,
       pageTitle: "Shop",
       path: "/",
       hasProducts: products.length > 0,

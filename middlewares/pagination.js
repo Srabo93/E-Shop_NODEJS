@@ -1,10 +1,18 @@
 const { createPagination } = require("../utils/paginationHelpers");
 
 const paginatedProducts = (model) => async (req, res, next) => {
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 10;
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
+  let page;
+  let limit;
+  if (req.path === "/") {
+    page = parseInt(req.query.page, 10) || 1;
+    limit = parseInt(req.query.limit, 10) || 5;
+  } else {
+    page = parseInt(req.query.page, 10) || 1;
+    limit = parseInt(req.query.limit, 10) || 10;
+  }
+
+  let startIndex = (page - 1) * limit;
+  let endIndex = page * limit;
 
   req.query.sort !== undefined
     ? (req.session.order = [req.query.sort.split(",")])
@@ -45,9 +53,6 @@ const paginatedUserOrders = (model) => async (req, res, next) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
-  /**
-   * TODO Add Sorty By Total Price after Models adjustments
-   */
   req.query.sort !== undefined
     ? (req.session.order = [req.query.sort.split(",")])
     : (req.session.order = req.session.order);
