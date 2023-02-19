@@ -51,7 +51,7 @@
             <div class="col-md-4 mw-50">
                 <img src="/<%= product.image %>" class="d-block p-5 mx-lg-auto img-fluid">
             </div>
-            <div class="col-md-5 ">
+            <div class="col-md-8">
                 <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
                 <p class="lead"><strong>$<%= product.price %></strong></p>
                 <p class="fst-italic">Rating: <%= product.rating %> of 5</p>
@@ -61,13 +61,6 @@
                     <% if(isAuthenticated) { %>
                     <%- include('../includes/add-to-cart.ejs',{product:product}) %>
                     <% } %>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="row my-3">
-                    <div class="col-md-6">
-                        <%- include('../includes/carousel.ejs',{data:topProducts}) %>
-                    </div>
                 </div>
             </div>
         </div>
