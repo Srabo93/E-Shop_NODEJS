@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Product_Category = require("../models/Product_Category");
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
@@ -380,23 +381,25 @@ categories.forEach((category) => {
     description: "This is Category resolving around" + category,
   });
 });
-
-User.create({
-  email: "new@new.com",
-  firstName: "John",
-  lastName: "Doe",
-  password: "new123",
-})
-  .then((user) => {
-    products.forEach((product) => {
-      Product.create({
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        image: product.thumbnail,
-        rating: product.rating,
-        productCategoryId: product.category,
-        userId: 1,
+let hashedPassword = bcrypt
+  .hash("new123", 12)
+  .then((hashPw) => {
+    User.create({
+      email: "new@new.com",
+      firstName: "John",
+      lastName: "Doe",
+      password: hashPw,
+    }).then((user) => {
+      products.forEach((product) => {
+        Product.create({
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          image: product.thumbnail,
+          rating: product.rating,
+          productCategoryId: product.category,
+          userId: 1,
+        });
       });
     });
   })
