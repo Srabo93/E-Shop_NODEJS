@@ -6,26 +6,14 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main class="container my-3">
-        <div class="px-4 py-5 my-5 text-center rounded  text-white border-bottom"
-            style="background-image: url('/img/shopping-cart.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.8);background-size: 27%;">
-            <h1 class="display-4 fw-bold">E-Shop</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Welcome to our online store! Here you can browse our wide selection of products,
-                    from clothing and accessories to
-                    electronics and home goods.
+        <h2 class="display-4 text-center">Top Products</h2>
 
-                    Start your shopping experience by searching for the items you need, or browse our categories to
-                    discover new and
-                    exciting products.</p>
-            </div>
-        </div>
-        <h2 class="display-4">Top Products</h2>
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+        <div class="row align-items-stretch g-4 py-2">
             <% for(let topProduct of topProducts) { %>
-            <div class="col">
+            <div class="col opacity-100">
                 <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
                     style=" background-image: url(<%= topProduct.image %>);">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"
+                    <div class="d-flex flex-column  h-100 p-5 pb-3 text-white text-shadow-1"
                         style="background-color: rgba(0, 0, 0, 0.7);">
                         <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"><%= topProduct.title %></h3>
                         <ul class="d-flex list-unstyled mt-auto">
