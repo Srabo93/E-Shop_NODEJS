@@ -92,6 +92,7 @@ const getProduct = asyncHandler(async (req, res, next) => {
     const product = await Product.findByPk(productId);
     res.render("shop/product-detail", {
       product,
+      relatedProducts: res.relatedProducts[0].products,
       pageTitle: "Shop|Product",
       path: "/product-list",
       csrfToken: req.session.csrfToken,

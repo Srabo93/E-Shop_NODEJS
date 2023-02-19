@@ -12,12 +12,50 @@
             <div class="col-lg-5">
                 <h3 class="display-6 fw-bold lh-1 mb-3"><%= product.title %></h3>
                 <p class="lead">$<%= product.price %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mb-2">
+                        <% for(let i = 1; i <= Math.round(product.rating); i++){ %>
+                        <i class="fa-solid fa-star"></i>
+                        <% } %>
+                        <% for(let i = 1; i <= 5 - Math.round(product.rating); i++){ %>
+                        <i class="fa-regular fa-star"></i>
+                        <% } %>
+                    </div>
+                </div>
                 <p class="lead"><%= product.description %></p>
                 <% if(isAuthenticated) { %>
                 <%- include('../includes/add-to-cart.ejs') %>
                 <% } %>
             </div>
-            <div class="col-lg-3">Potentielle Werbung</div>
+            <div class="col-lg-3">
+            </div>
+            <h3 class="mt-4">Related Products</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <% for (let relatedProduct of relatedProducts) { %>
+                <div class="col-lg-2">
+                    <div class="card">
+                        <img src="<%= relatedProduct.image %>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= relatedProduct.title %></h5>
+                            <h6 class="card-subtitle">$ <%= relatedProduct.price %></h6>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mb-2">
+                                    <% for(let i = 1; i <= Math.round(relatedProduct.rating); i++){ %>
+                                    <i class="fa-solid fa-star fa-sm"></i>
+                                    <% } %>
+                                    <% for(let i = 1; i <= 5 - Math.round(relatedProduct.rating); i++){ %>
+                                    <i class="fa-regular fa-star fa-sm"></i>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <p class="card-text"><%= relatedProduct.description.substring(0,70) %>...</p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        </div>
         </div>
 
     </main>

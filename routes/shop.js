@@ -5,7 +5,7 @@ const {
   paginatedProducts,
   paginatedUserOrders,
 } = require("../middlewares/pagination");
-const router = express.Router();
+const { relatedProducts } = require("../middlewares/relatedProducts");
 const {
   getProducts,
   getIndex,
@@ -19,10 +19,11 @@ const {
   getInvoice,
   createPaymentIntent,
 } = require("../controllers/shop");
+const router = express.Router();
 
 router.route("/").get(paginatedProducts(Product), getIndex);
 router.route("/products").get(paginatedProducts(Product), getProducts);
-router.route("/products/:productId").get(getProduct);
+router.route("/products/:productId").get(relatedProducts, getProduct);
 router
   .route("/cart")
   .get(isAuthenticated, getCart)
