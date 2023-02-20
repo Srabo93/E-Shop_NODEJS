@@ -4,9 +4,9 @@ Simple E-commerce Shop
 
 ### Dev Setup
 
-├── .env
-├── data
-│ │ ├── invoices
+├── .env\
+├── data\
+│ │ ├── invoices\
 │ │ ├── images
 
 ```
@@ -22,6 +22,8 @@ npm run dev
 database seeder: node config/seeder.js
 
 ```
+
+.env
 
 ```
 
