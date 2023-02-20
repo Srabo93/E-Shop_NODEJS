@@ -14,10 +14,15 @@ const paginatedProducts = (model) => async (req, res, next) => {
   let startIndex = (page - 1) * limit;
   let endIndex = page * limit;
 
-  req.query.sort !== undefined
+  const sortable = ["createdAt", "rating", "price"];
+  req.query.sort !== undefined &&
+  sortable.includes(req.query.sort.split(",")[0])
     ? (req.session.order = [req.query.sort.split(",")])
     : (req.session.order = req.session.order);
 
+  req.query.sort === undefined && !sortable.includes(req.session.order[0][0])
+    ? (req.session.order = [["createdAt", "asc"]])
+    : (req.session.order = req.session.order);
   try {
     const total = await model.count();
     const results = await model.findAll({
@@ -53,8 +58,14 @@ const paginatedUserOrders = (model) => async (req, res, next) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
-  req.query.sort !== undefined
+  const sortable = ["createdAt", "total"];
+  req.query.sort !== undefined &&
+  sortable.includes(req.query.sort.split(",")[0])
     ? (req.session.order = [req.query.sort.split(",")])
+    : (req.session.order = req.session.order);
+
+  req.query.sort === undefined && !sortable.includes(req.session.order[0][0])
+    ? (req.session.order = [["createdAt", "asc"]])
     : (req.session.order = req.session.order);
 
   try {
@@ -95,6 +106,10 @@ const paginatedAdminProducts = (model) => async (req, res, next) => {
 
   req.query.sort !== undefined
     ? (req.session.order = [req.query.sort.split(",")])
+    : (req.session.order = req.session.order);
+
+  req.query.sort === undefined && !sortable.includes(req.session.order[0][0])
+    ? (req.session.order = [["createdAt", "asc"]])
     : (req.session.order = req.session.order);
 
   try {
