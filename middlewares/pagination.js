@@ -20,7 +20,7 @@ const paginatedProducts = (model) => async (req, res, next) => {
     ? (req.session.order = [req.query.sort.split(",")])
     : (req.session.order = req.session.order);
 
-  req.query.sort === undefined && !sortable.includes(req.session.order[0][0])
+  req.query.sort === undefined && req.session.order === undefined
     ? (req.session.order = [["createdAt", "asc"]])
     : (req.session.order = req.session.order);
   try {
@@ -64,34 +64,43 @@ const paginatedUserOrders = (model) => async (req, res, next) => {
     ? (req.session.order = [req.query.sort.split(",")])
     : (req.session.order = req.session.order);
 
-  req.query.sort === undefined && !sortable.includes(req.session.order[0][0])
+  req.query.sort === undefined && req.session.order === undefined
     ? (req.session.order = [["createdAt", "asc"]])
     : (req.session.order = req.session.order);
 
   try {
     const total = await req.user.countOrders();
-    const results = await req.user.getOrders({
-      include: ["products"],
-      offset: startIndex,
-      limit,
-      order: req.session.order,
-    });
-    const pagesTotal = Math.ceil(parseInt(total, 10) / limit);
+    console.log(total);
+    if (total === 0) {
+      res.paginatedUserOrders = {
+        success: false,
+        pagination: {},
+        data: {},
+      };
+    } else {
+      const results = await req.user.getOrders({
+        include: ["products"],
+        offset: startIndex,
+        limit,
+        order: req.session.order,
+      });
+      const pagesTotal = Math.ceil(parseInt(total, 10) / limit);
 
-    const pagination = await createPagination({
-      endIndex,
-      total,
-      page,
-      startIndex,
-      pagesTotal,
-      limit,
-    });
+      const pagination = await createPagination({
+        endIndex,
+        total,
+        page,
+        startIndex,
+        pagesTotal,
+        limit,
+      });
 
-    res.paginatedUserOrders = {
-      success: true,
-      pagination,
-      data: results,
-    };
+      res.paginatedUserOrders = {
+        success: true,
+        pagination,
+        data: results,
+      };
+    }
   } catch (error) {
     next(error);
   }
@@ -108,7 +117,7 @@ const paginatedAdminProducts = (model) => async (req, res, next) => {
     ? (req.session.order = [req.query.sort.split(",")])
     : (req.session.order = req.session.order);
 
-  req.query.sort === undefined && !sortable.includes(req.session.order[0][0])
+  req.query.sort === undefined && req.session.order === undefined
     ? (req.session.order = [["createdAt", "asc"]])
     : (req.session.order = req.session.order);
 
