@@ -395,7 +395,7 @@ let hashedPassword = bcrypt
           title: product.title,
           description: product.description,
           price: product.price,
-          image: product.thumbnail,
+          image: product.images[0],
           rating: product.rating,
           productCategoryId: product.category,
           userId: 1,
