@@ -382,10 +382,10 @@ categories.forEach((category) => {
   });
 });
 let hashedPassword = bcrypt
-  .hash("new123", 12)
+  .hash("user123", 12)
   .then((hashPw) => {
     User.create({
-      email: "new@new.com",
+      email: "john@doe.com",
       firstName: "John",
       lastName: "Doe",
       password: hashPw,
