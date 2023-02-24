@@ -4,11 +4,6 @@ Simple E-commerce Shop
 
 ### Dev Setup
 
-├── .env\
-├── data\
-│ │ ├── invoices\
-│ │ ├── images
-
 ```
 
 npm run container
