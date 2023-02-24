@@ -60,7 +60,7 @@ const userLoginRules = [
     .isLength({ min: 5, max: 18 }),
 ];
 
-const productRules = [
+const addProductRules = [
   body("title")
     .ltrim()
     .rtrim()
@@ -73,6 +73,20 @@ const productRules = [
     .isLength({ min: 1, max: 400 })
     .withMessage("Description must be min Lenght 1 and Max Length 400"),
   body("categoryOptions").isLength({ min: 1 }).withMessage("Category required"),
+];
+
+const editProductRules = [
+  body("title")
+    .ltrim()
+    .rtrim()
+    .isAlphanumeric("en-US", { ignore: " -" })
+    .withMessage("Invalid Value, Title can contain Alphanumeric characters")
+    .isLength({ min: 3, max: 250 }),
+  body("price").isFloat().withMessage("Number must be of type Float"),
+  body("description")
+    .trim()
+    .isLength({ min: 1, max: 400 })
+    .withMessage("Description must be min Lenght 1 and Max Length 400"),
 ];
 
 const validate = (req, res, next) => {
@@ -145,6 +159,7 @@ const validate = (req, res, next) => {
 module.exports = {
   userSignUpRules,
   userLoginRules,
-  productRules,
+  addProductRules,
+  editProductRules,
   validate,
 };
