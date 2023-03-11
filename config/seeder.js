@@ -21,13 +21,7 @@ let products = [
     brand: "Apple",
     category: 3,
     thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/1/1.jpg",
-      "https://i.dummyjson.com/data/products/1/2.jpg",
-      "https://i.dummyjson.com/data/products/1/3.jpg",
-      "https://i.dummyjson.com/data/products/1/4.jpg",
-      "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271522179-167023087.jpg"],
   },
   {
     id: 2,
@@ -41,12 +35,7 @@ let products = [
     brand: "Apple",
     category: 3,
     thumbnail: "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/2/1.jpg",
-      "https://i.dummyjson.com/data/products/2/2.jpg",
-      "https://i.dummyjson.com/data/products/2/3.jpg",
-      "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271508380-170019756.jpg"],
   },
   {
     id: 3,
@@ -60,7 +49,7 @@ let products = [
     brand: "Samsung",
     category: 3,
     thumbnail: "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-    images: ["https://i.dummyjson.com/data/products/3/1.jpg"],
+    images: ["data/images/image-1677271493612-210134279.jpg"],
   },
   {
     id: 4,
@@ -73,13 +62,7 @@ let products = [
     brand: "OPPO",
     category: 3,
     thumbnail: "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/4/1.jpg",
-      "https://i.dummyjson.com/data/products/4/2.jpg",
-      "https://i.dummyjson.com/data/products/4/3.jpg",
-      "https://i.dummyjson.com/data/products/4/4.jpg",
-      "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271310927-290227319.jpg"],
   },
   {
     id: 5,
@@ -93,11 +76,7 @@ let products = [
     brand: "Huawei",
     category: 3,
     thumbnail: "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/5/1.jpg",
-      "https://i.dummyjson.com/data/products/5/2.jpg",
-      "https://i.dummyjson.com/data/products/5/3.jpg",
-    ],
+    images: ["data/images/image-1677272885944-312600097.jpg"],
   },
   {
     id: 6,
@@ -108,15 +87,10 @@ let products = [
     discountPercentage: 11.02,
     rating: 4.57,
     stock: 83,
-    brand: "APPle",
+    brand: "Apple",
     category: 1,
     thumbnail: "https://i.dummyjson.com/data/products/6/thumbnail.png",
-    images: [
-      "https://i.dummyjson.com/data/products/6/1.png",
-      "https://i.dummyjson.com/data/products/6/2.jpg",
-      "https://i.dummyjson.com/data/products/6/3.png",
-      "https://i.dummyjson.com/data/products/6/4.jpg",
-    ],
+    images: ["data/images/image-1677271447434-44502611.png"],
   },
   {
     id: 7,
@@ -130,12 +104,7 @@ let products = [
     brand: "Samsung",
     category: 1,
     thumbnail: "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/7/1.jpg",
-      "https://i.dummyjson.com/data/products/7/2.jpg",
-      "https://i.dummyjson.com/data/products/7/3.jpg",
-      "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271435485-151529075.jpg"],
   },
   {
     id: 8,
@@ -149,13 +118,7 @@ let products = [
     brand: "Microsoft Surface",
     category: 1,
     thumbnail: "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/8/1.jpg",
-      "https://i.dummyjson.com/data/products/8/2.jpg",
-      "https://i.dummyjson.com/data/products/8/3.jpg",
-      "https://i.dummyjson.com/data/products/8/4.jpg",
-      "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271412553-846169644.jpg"],
   },
   {
     id: 9,
@@ -169,13 +132,7 @@ let products = [
     brand: "Infinix",
     category: 1,
     thumbnail: "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/9/1.jpg",
-      "https://i.dummyjson.com/data/products/9/2.png",
-      "https://i.dummyjson.com/data/products/9/3.png",
-      "https://i.dummyjson.com/data/products/9/4.jpg",
-      "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271386017-988733635.jpg"],
   },
   {
     id: 10,
@@ -189,12 +146,7 @@ let products = [
     brand: "HP Pavilion",
     category: 1,
     thumbnail: "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
-    images: [
-      "https://i.dummyjson.com/data/products/10/1.jpg",
-      "https://i.dummyjson.com/data/products/10/2.jpg",
-      "https://i.dummyjson.com/data/products/10/3.jpg",
-      "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
-    ],
+    images: ["data/images/image-1677267512521-954615515.jpg"],
   },
   {
     id: 11,
@@ -208,12 +160,7 @@ let products = [
     brand: "Impression of Acqua Di Gio",
     category: 2,
     thumbnail: "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/11/1.jpg",
-      "https://i.dummyjson.com/data/products/11/2.jpg",
-      "https://i.dummyjson.com/data/products/11/3.jpg",
-      "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271251325-170546742.jpg"],
   },
   {
     id: 12,
@@ -226,13 +173,7 @@ let products = [
     brand: "Royal_Mirage",
     category: 2,
     thumbnail: "https://i.dummyjson.com/data/products/12/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/12/1.jpg",
-      "https://i.dummyjson.com/data/products/12/2.jpg",
-      "https://i.dummyjson.com/data/products/12/3.png",
-      "https://i.dummyjson.com/data/products/12/4.jpg",
-      "https://i.dummyjson.com/data/products/12/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271241418-332014753.jpg"],
   },
   {
     id: 13,
@@ -246,13 +187,7 @@ let products = [
     brand: "Fog Scent Xpressio",
     category: 2,
     thumbnail: "https://i.dummyjson.com/data/products/13/thumbnail.webp",
-    images: [
-      "https://i.dummyjson.com/data/products/13/1.jpg",
-      "https://i.dummyjson.com/data/products/13/2.png",
-      "https://i.dummyjson.com/data/products/13/3.jpg",
-      "https://i.dummyjson.com/data/products/13/4.jpg",
-      "https://i.dummyjson.com/data/products/13/thumbnail.webp",
-    ],
+    images: ["data/images/image-1677271220029-734455890.jpg"],
   },
   {
     id: 14,
@@ -266,12 +201,7 @@ let products = [
     brand: "Al Munakh",
     category: 2,
     thumbnail: "https://i.dummyjson.com/data/products/14/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/14/1.jpg",
-      "https://i.dummyjson.com/data/products/14/2.jpg",
-      "https://i.dummyjson.com/data/products/14/3.jpg",
-      "https://i.dummyjson.com/data/products/14/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271177202-457680430.jpg"],
   },
   {
     id: 15,
@@ -285,13 +215,7 @@ let products = [
     brand: "Lord - Al-Rehab",
     category: 2,
     thumbnail: "https://i.dummyjson.com/data/products/15/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/15/1.jpg",
-      "https://i.dummyjson.com/data/products/15/2.jpg",
-      "https://i.dummyjson.com/data/products/15/3.jpg",
-      "https://i.dummyjson.com/data/products/15/4.jpg",
-      "https://i.dummyjson.com/data/products/15/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1678537749224-885644757.jpg"],
   },
   {
     id: 26,
@@ -305,14 +229,7 @@ let products = [
     brand: "Boho Decor",
     category: 4,
     thumbnail: "https://i.dummyjson.com/data/products/26/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/26/1.jpg",
-      "https://i.dummyjson.com/data/products/26/2.jpg",
-      "https://i.dummyjson.com/data/products/26/3.jpg",
-      "https://i.dummyjson.com/data/products/26/4.jpg",
-      "https://i.dummyjson.com/data/products/26/5.jpg",
-      "https://i.dummyjson.com/data/products/26/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271141838-522726528.jpg"],
   },
   {
     id: 27,
@@ -326,13 +243,7 @@ let products = [
     brand: "Flying Wooden",
     category: 4,
     thumbnail: "https://i.dummyjson.com/data/products/27/thumbnail.webp",
-    images: [
-      "https://i.dummyjson.com/data/products/27/1.jpg",
-      "https://i.dummyjson.com/data/products/27/2.jpg",
-      "https://i.dummyjson.com/data/products/27/3.jpg",
-      "https://i.dummyjson.com/data/products/27/4.jpg",
-      "https://i.dummyjson.com/data/products/27/thumbnail.webp",
-    ],
+    images: ["data/images/image-1677271099623-208547984.jpg"],
   },
   {
     id: 28,
@@ -346,13 +257,7 @@ let products = [
     brand: "LED Lights",
     category: 4,
     thumbnail: "https://i.dummyjson.com/data/products/28/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/28/1.jpg",
-      "https://i.dummyjson.com/data/products/28/2.jpg",
-      "https://i.dummyjson.com/data/products/28/3.png",
-      "https://i.dummyjson.com/data/products/28/4.jpg",
-      "https://i.dummyjson.com/data/products/28/thumbnail.jpg",
-    ],
+    images: ["data/images/image-1677271066228-252167998.jpg"],
   },
   {
     id: 29,
@@ -366,13 +271,7 @@ let products = [
     brand: "luxury palace",
     category: 4,
     thumbnail: "https://i.dummyjson.com/data/products/29/thumbnail.webp",
-    images: [
-      "https://i.dummyjson.com/data/products/29/1.jpg",
-      "https://i.dummyjson.com/data/products/29/2.jpg",
-      "https://i.dummyjson.com/data/products/29/3.webp",
-      "https://i.dummyjson.com/data/products/29/4.webp",
-      "https://i.dummyjson.com/data/products/29/thumbnail.webp",
-    ],
+    images: ["data/images/image-1677270995123-248446326.jpg"],
   },
 ];
 categories.forEach((category) => {
