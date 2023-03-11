@@ -57,7 +57,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "http://localhost:8000/create-order",
+      return_url: "https://e-shop-nodejs.onrender.com/create-order",
       receipt_email: emailAddress,
     },
   });
