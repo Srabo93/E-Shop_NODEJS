@@ -1,9 +1,15 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("E-Shop", "root", "password", {
+let sequelize;
+
+if(process.env.NODE_ENV === 'production'){
+   sequelize = new Sequelize(process.env.PSQL_URI)
+}else{
+   sequelize = new Sequelize("E-Shop", "root", "password", {
   host: "db",
-  dialect: "mysql",
+  dialect: "postgres",
   logging: false,
-});
+  })
+}
 
 module.exports = sequelize;

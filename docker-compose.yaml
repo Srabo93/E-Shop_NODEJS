@@ -16,14 +16,14 @@ services:
     depends_on:
       - db
   db:
-    image: mysql:8.0.27
-    command: '--default-authentication-plugin=mysql_native_password'
+    image: postgres
     restart: always
     environment:
-      - MYSQL_DATABASE=E-Shop
-      - MYSQL_ROOT_PASSWORD=password
+      - POSTGRES_DB=E-Shop
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/psql
   adminer:
     image: adminer
     restart: always
