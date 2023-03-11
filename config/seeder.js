@@ -1,12 +1,29 @@
-const Product = require("../models/Product");
-const Product_Category = require("../models/Product_Category");
-const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const sequelize = require("./database");
 
-Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
-User.hasMany(Product);
+/* DB Connection and init DB*/
+const Product = require("../models/Product");
+const User = require("../models/User");
+const Cart = require("../models/Cart");
+const CartItem = require("../models/CartItem");
+const Order = require("../models/Order");
+const OrderItem = require("../models/OrderItem");
+const Payment_Details = require("../models/Payment_Details");
+const Product_Category = require("../models/Product_Category");
+
 Product_Category.hasMany(Product);
 Product.belongsTo(Product_Category);
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
+Order.hasOne(Payment_Details);
+Payment_Details.belongsTo(Order);
 
 let categories = ["laptops", "fragrances", "smartphones", "homeDeco"];
 let products = [
@@ -274,30 +291,36 @@ let products = [
     images: ["data/images/image-1677270995123-248446326.jpg"],
   },
 ];
-categories.forEach((category) => {
-  Product_Category.create({
-    title: category,
-    description: "This is Category resolving around" + category,
-  });
-});
-let hashedPassword = bcrypt
-  .hash("user123", 12)
-  .then((hashPw) => {
-    User.create({
-      email: "john@doe.com",
-      firstName: "John",
-      lastName: "Doe",
-      password: hashPw,
-    }).then((user) => {
-      products.forEach((product) => {
-        Product.create({
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          image: product.images[0],
-          rating: product.rating,
-          productCategoryId: product.category,
-          userId: 1,
+sequelize
+  .authenticate()
+  .then(() => console.log("Connection has been established successfully."))
+  .catch((error) => console.error("Unable to connect to the database:", error));
+sequelize
+  .sync()
+  .then(() => {
+    categories.forEach((category) => {
+      Product_Category.create({
+        title: category,
+        description: "This is Category resolving around" + category,
+      });
+    });
+    let hashedPassword = bcrypt.hash("user123", 12).then((hashPw) => {
+      User.create({
+        email: "john@doe.com",
+        firstName: "John",
+        lastName: "Doe",
+        password: hashPw,
+      }).then((user) => {
+        products.forEach((product) => {
+          Product.create({
+            title: product.title,
+            description: product.description,
+            price: product.price,
+            image: product.images[0],
+            rating: product.rating,
+            productCategoryId: product.category,
+            userId: 1,
+          });
         });
       });
     });
