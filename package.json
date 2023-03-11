@@ -5,9 +5,9 @@
   "description": "",
   "author": "mdo",
   "license": "MIT",
-  "main": "./app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node main",
+    "start": "node app.js",
     "container": "docker-compose up -d && docker compose exec e-shop sh",
     "db": "docker-compose exec db psql -uroot -p",
     "dev": " nodemon main",
