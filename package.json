@@ -5,7 +5,7 @@
   "description": "",
   "author": "mdo",
   "license": "MIT",
-  "main": "app.js",
+  "main": "./app.js",
   "scripts": {
     "start": "node main",
     "container": "docker-compose up -d && docker compose exec e-shop sh",
