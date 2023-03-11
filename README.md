@@ -12,7 +12,7 @@ npm install
 
 npm run dev
 
-
+/public/checkout.js -> set /create-order api call to localhost
 
 database seeder: node config/seeder.js
 
