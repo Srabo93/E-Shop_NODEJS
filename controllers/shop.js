@@ -133,7 +133,7 @@ const postCartItem = asyncHandler(async (req, res, next) => {
   try {
     let cart = await req.user.getCart();
     if (!cart) {
-      await req.user.createCart();
+      cart = await req.user.createCart();
     }
     let cartProducts = await cart.getProducts({ where: { id: productId } });
     let product;
