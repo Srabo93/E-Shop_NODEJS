@@ -1,34 +1,37 @@
-version: "3.8"
-
 services:
-  e-shop:
-    image: node:16-alpine
-    container_name: "e-shop-express"
-    working_dir: '/app'
-    stdin_open: true
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8000:8000
     volumes:
       - ./:/app
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ./node_modules:/app/node_modules
-    ports:
-      - "8000:8000"
+    # to set the database password. You must create `db/password.txt`
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   db:
     image: postgres
     restart: always
-    environment:
-      - POSTGRES_DB=E-Shop
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=root
+    user: postgres
+    secrets:
+      - db-password
     volumes:
-      - db-data:/var/lib/psql
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=e-shop
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   db-data:
+secrets:
+  db-password:
+    file: db/password.txt
