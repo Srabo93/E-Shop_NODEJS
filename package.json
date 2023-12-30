@@ -10,7 +10,6 @@
     "start": "node app.js",
     "container": "docker-compose up -d && docker compose exec e-shop sh",
     "db": "docker-compose exec db psql -uroot -p",
-    "tailwind": "npx tailwindcss -i ./public/css/style.css -o ./public/css/dist.css --watch",
     "dev": "nodemon main && pnpm run tailwind",
     "seed-db": "node config/seeder.js"
   },
