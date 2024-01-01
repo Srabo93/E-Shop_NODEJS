@@ -1,7 +1,7 @@
 # E-Commerce_NodeJS
 
 Simple E-commerce Shop
-https://e-shop-nodejs.onrender.com
+e-com.srabodev.de/
 
 ### Dev Setup
 
