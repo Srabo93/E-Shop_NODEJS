@@ -1,7 +1,7 @@
 # E-Commerce_NodeJS
 
 Simple E-commerce Shop
-e-com.srabodev.de/
+[e-commerce shop](e-com.srabodev.de/)
 
 ### Dev Setup
 
