@@ -1,7 +1,6 @@
 # E-Commerce_NodeJS
 
-Simple E-commerce Shop
-e-com.srabodev.de
+Simple E-commerce Shop: https://e-com.srabodev.de/
 
 ### Dev Setup
 
