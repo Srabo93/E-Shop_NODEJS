@@ -1,6 +1,16 @@
-# E-Commerce_NodeJS
+# E-Commerce
 
-Simple E-commerce Shop: https://e-com.srabodev.de/
+Simple E-commerce Shop built with the MVC Pattern. The Goal was to gather experience with the MVC Pattern and comparing it to MERN applications.
+
+### Demo
+https://e-com.srabodev.de/
+
+### Technology
+
+- [Node JS](https://nodejs.org/)
+- [Node Express](https://expressjs.com/)
+- [Postgresql](https://postgresql.org/)
+- [Sequelize](https://sequelize.org/)
 
 ### Dev Setup
 
